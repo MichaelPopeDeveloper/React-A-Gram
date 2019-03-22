@@ -1,0 +1,12 @@
+{
+    "extends": "tslint-config-airbnb",
+    "rules": {
+        "variable-name": [
+            "allow-pascal-case"
+        ],
+        "function-name": [
+            "allow-pascal-case"
+        ],
+        "increment-decrement": true
+    }
+}
