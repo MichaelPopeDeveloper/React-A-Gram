@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
+#TitleBar {
+  width: 100%;
+  min-height: 10vh;
+  background-color: white;
+}
+#TitleBar h2 {
+  font-family: Pacifico;
+}
+
+.post-image-wrapper {
+  width: 75%;
+}
+
+.post-wrapper {
+  width: 100%;
+}
+
+#Author-Description {
+  padding-left: 1.3rem;
+}
+
+.author-post-img-wrapper {
+  width: 10%;
+}
+
+#Author-Post-Header {
+  padding-left: 0.7rem;
+}
+
+.post-author-username {
+  font-size: 70%;
+}
+
+/*# sourceMappingURL=app.css.map */
