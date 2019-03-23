@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/app.css';
+import '../../styles/app.css';
 
 class Post extends Component {
   render() {
@@ -16,8 +16,9 @@ class Post extends Component {
             <div className="post-img-wrapper">
               <img className="img-post img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
             </div>
-            <div className="w-100 d-flex justify-content-start pt-2">
-              <p className="text-left" id="Author-Description"> <b className="pr-2">User</b> My adventure through Japan was incredible! I hope I can come back again!</p>
+            <div className="w-100 d-flex flex-column justify-content-start pt-2">
+              <p className="text-left pb-0 mb-0 author-description-comment" id="Author-Description"> <b className="pr-2">User</b> My adventure through Japan was incredible! I hope I can come back again!</p>
+              <p className="text-secondary pt-1 author-description-comment" id="Author-Description">View all comments</p>
             </div>
           </div>
         </div>

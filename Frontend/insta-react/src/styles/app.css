@@ -32,4 +32,33 @@
   font-size: 70%;
 }
 
+.author-description-comment {
+  font-size: 80%;
+}
+
+#ProfileTitleBar {
+  width: 100%;
+  min-height: 10vh;
+  background-color: white;
+}
+#ProfileTitleBar h2 {
+  font-size: 85%;
+}
+
+.ProfileImageWrapper {
+  width: 100%;
+}
+
+.profile-col-pad {
+  padding: 0.07rem;
+}
+
+.profile-header-text {
+  font-size: 220%;
+}
+
+#Author-Description {
+  padding-left: 1.3rem;
+}
+
 /*# sourceMappingURL=app.css.map */

@@ -5,9 +5,15 @@ $TitleBarWidth: 100%
 $TitleBarHeight: 10vh
 $TitleBarBackgroundColor: white
 
+
+
+// Profile variables
+$profileUsernameFS: 85%
+
 // Post variables
 $imgPostWidth: 100%
 $postHeaderUsernameFS: 70%
+$authorDescriptionCommentFS: 80%
 
 #TitleBar 
   width: $TitleBarWidth
@@ -35,5 +41,37 @@ $postHeaderUsernameFS: 70%
 
 .post-author-username
   font-size: $postHeaderUsernameFS
+
+.author-description-comment
+  font-size: $authorDescriptionCommentFS
+
+// Profile Styles
+
+// Profile Variables
+$ProfileImageWrapperHeight: 100%
+$ProfileHeaderFS: 220%
+
+#ProfileTitleBar
+  width: $TitleBarWidth
+  min-height: $TitleBarHeight
+  background-color: $TitleBarBackgroundColor
+
+  h2
+    font-size: $profileUsernameFS
+
+.ProfileImageWrapper
+  width: $ProfileImageWrapperHeight
+
+.profile-col-pad
+  padding: 0.07rem
+
+.profile-header-text
+  font-size: $ProfileHeaderFS
+
+#Author-Description
+  padding-left: 1.3rem
+
+
+
     
 

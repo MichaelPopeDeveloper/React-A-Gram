@@ -6,15 +6,18 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
+import Home from './Home/Home';
 import NewsFeed from './NewsFeed'
+import Profile from './Profile/Profile';
 
  const Routes = () => {
   return (
     <Router>
       <div>
         {/* <AuthButton /> */}
-
-        <Route path="/" component={NewsFeed} />
+        <Route path="/home" component={Home} />
+        <Route path="/newsfeed" component={NewsFeed} />
+        <Route path="/profile" component={Profile} />
         {/* <Route path="/notes" component={Notes} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} /> */}
