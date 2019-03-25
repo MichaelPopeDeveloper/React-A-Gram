@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import * as axios from 'axios';
 import { connect } from 'react-redux';
 import '../../styles/app.css';
-import { addArticle } from '../../actions/index';
+import { loginUser } from '../../actions/index';
+import Titlebar from '../TitleBar/Titlebar';
 
 const mapStateToProps = state => {
   // return { articles: state.articles };
@@ -11,7 +12,7 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addArticle: article => dispatch(addArticle(article))
+    loginUser: user => dispatch(loginUser(user))
   };
 }
 
@@ -39,6 +40,7 @@ class Login extends Component {
     })
       .then((res) => {
         console.log(res);
+        this.props.loginUser(res.data.user);
         //   this.setState({ name: decodedToken.name });
       })
       .catch(err => console.log(err));
@@ -49,7 +51,6 @@ class Login extends Component {
     event.preventDefault();
     const { username, email, password } = this.state;
     // console.log({ email, password });
-    this.props.addArticle({title: username});
     console.log('props', this.props);
     this.login({ username, email, password });
   }
@@ -70,22 +71,27 @@ class Login extends Component {
   render() {
     const { username, email, password } = this.state;
     return (
-      <div className="row">
-        <div className="col d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-          <div style={{ marginTop: '10vh' }}></div>
+      <div>
+        <Titlebar />
+        <div className="row">
+          <div className="col d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+            <div style={{ marginTop: '10vh' }}></div>
 
-          <form className="shadow p-5" onSubmit={this.handleSubmit}>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Username</label>
-              <input value={username} onChange={this.handleUsernameChange}  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input value={password} onChange={this.handlePaswordChange} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-            </div>
-            <button type="submit" className="btn btn-primary">Login</button>
-          </form>
+            <h1 className="p-4">Login</h1>
 
+            <form className="shadow p-5" onSubmit={this.handleSubmit}>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input value={username} onChange={this.handleUsernameChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input value={password} onChange={this.handlePaswordChange} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+              </div>
+              <button type="submit" className="btn btn-primary">Login</button>
+            </form>
+
+          </div>
         </div>
       </div>
     );

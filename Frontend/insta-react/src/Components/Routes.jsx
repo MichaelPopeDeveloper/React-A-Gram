@@ -17,7 +17,7 @@ import Login from './Login/Login';
     <Router>
       <div>
         {/* <AuthButton /> */}
-        <Route path="/home" component={Signup} />
+        <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route path="/newsfeed" component={NewsFeed} />
         <Route path="/profile" component={Profile} />

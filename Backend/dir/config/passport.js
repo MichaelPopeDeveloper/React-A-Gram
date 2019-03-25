@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var passport = require("passport");
 var User_1 = require("../models/User");
+var Encryptor = require("../helper/Encryptor");
 var LocalStrategy = require('passport-local');
 passport.use(new LocalStrategy({
     usernameField: 'username',
@@ -9,7 +10,7 @@ passport.use(new LocalStrategy({
 }, function (username, password, done) {
     User_1.User.findOne({ username: username })
         .then(function (user) {
-        if (!user) {
+        if (!user || !Encryptor.compareEncryptedString(password, user.password)) {
             console.log('you done offed');
             console.log(user);
             return done(null, false, { errors: { 'email or password': 'is invalid' } });

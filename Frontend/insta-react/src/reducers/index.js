@@ -1,10 +1,7 @@
-import { ADD_ARTICLE } from "../constants/action-types";
+import { ADD_ARTICLE, LOGIN_USER } from "../constants/action-types";
 
 const initialState = {
   articles: [],
-  eggs: [
-    'eggs',
-  ],
 };
 
 function rootReducer(state = initialState, action) {
@@ -12,6 +9,11 @@ function rootReducer(state = initialState, action) {
     return Object.assign({}, state, {
       articles: state.articles.concat(action.payload),
     //  eggs: state.eggs.concat(action.payload)
+    });
+  }
+  if (action.type === LOGIN_USER) {
+    return Object.assign({}, state, {
+      user: state.user = action.payload,
     });
   }
   return state;

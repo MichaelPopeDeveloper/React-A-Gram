@@ -11,7 +11,7 @@ passport.use(new LocalStrategy(
   (username: string, password: string, done: any) => {
     User.findOne({ username })
       .then((user) => {
-        if (!user/*|| !Encryptor.compareEncryptedString(password, (user as any).password)*/) {
+        if (!user || !Encryptor.compareEncryptedString(password, (user as any).password)) {
           console.log('you done offed');
           console.log(user);
           return done(null, false, { errors: { 'email or password': 'is invalid' } });

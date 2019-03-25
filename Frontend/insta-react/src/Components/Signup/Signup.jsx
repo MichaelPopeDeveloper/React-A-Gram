@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as axios from 'axios';
 import '../../styles/app.css';
+import Titlebar from '../TitleBar/Titlebar';
 
 class Signup extends Component {
   constructor() {
@@ -56,9 +57,13 @@ class Signup extends Component {
   render() {
     const { username, email, password } = this.state;
     return (
-      <div className="row">
-        <div className="col d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <div>
+        <Titlebar />
+     <div className="row">
+        <div className="col d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
           <div style={{ marginTop: '10vh' }}></div>
+
+          <h1 className="p-4">Signup</h1>
 
           <form className="shadow p-5" onSubmit={this.handleSubmit}>
             <div class="form-group">
@@ -78,6 +83,7 @@ class Signup extends Component {
           </form>
 
         </div>
+      </div>
       </div>
     );
   }
