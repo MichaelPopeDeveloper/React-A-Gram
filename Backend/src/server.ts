@@ -1,8 +1,10 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
+import * as session from 'express-session';
+import * as passport from 'passport';
 import * as logger from 'morgan';
 import * as path from 'path';
-// import { userRoute } from './routes/user';
+import { userRoute } from './routes/UserRoute';
 import { connect } from 'mongoose';
 
 /**
@@ -65,7 +67,7 @@ export class Server {
    */
   public config() {
     // add static paths
-  //  this.app.use(express.static(path.join(__dirname, 'public')));
+    //  this.app.use(express.static(path.join(__dirname, 'public')));
 
     // use logger middleware
     this.app.use(logger('dev'));
@@ -78,9 +80,19 @@ export class Server {
       extended: true,
     }));
 
-   // connect('mongodb://localhost:27017/note-app', { useNewUrlParser: true })
-    //  .then(() => console.log('Connected to MongoDB'))
-     // .catch(err => console.log(err));
+    this.app.use(
+      session({
+        secret: 'midoria-shonen',
+        resave: false,
+        saveUninitialized: false,
+      }));
+
+    this.app.use(passport.initialize());
+    this.app.use(passport.session());
+
+    connect('mongodb://localhost:27017/react-a-gram', { useNewUrlParser: true })
+     .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.log(err));
 
     // use cookie parser middleware
     // this.app.use(cookieParser("SECRET_GOES_HERE"));
@@ -89,7 +101,8 @@ export class Server {
     // this.app.use(methodOverride());
 
     // catch 404 and forward to error handler
-    // this.app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
+    // this.app.use(function (err: any, req: express.Request,
+    // res: express.Response, next: express.NextFunction) {
     //     err.status = 404;
     //     next(err);
     // });
@@ -113,8 +126,8 @@ export class Server {
    */
   private routes() {
     // use router middleware
-    // this.app.use('/user', userRoute);
-    this.app.use('/test', (req, res) => res.send('Go beyond!'));
+    this.app.use('/user', userRoute);
+    // this.app.use('/test', (req, res) => res.send('Go beyond!'));
   }
 
 }

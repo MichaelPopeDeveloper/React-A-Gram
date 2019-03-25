@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as axios from 'axios';
 import '../../styles/app.css';
 
-class Login extends Component {
+class Signup extends Component {
   constructor() {
     super();
     this.state = {
@@ -19,9 +19,10 @@ class Login extends Component {
   }
 
   login() {
-    const { username, password } = this.state;
-    axios.post('/user/login', {
+    const { username, email, password } = this.state;
+    axios.post('/user/signup', {
       username,
+      email,
       password,
     })
       .then((res) => {
@@ -65,6 +66,11 @@ class Login extends Component {
               <input value={username} onChange={this.handleUsernameChange}  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" />
             </div>
             <div class="form-group">
+              <label for="exampleInputEmail1">email</label>
+              <input value={email} onChange={this.handleEmailChange} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
               <input value={password} onChange={this.handlePaswordChange} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
             </div>
@@ -77,4 +83,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Signup;

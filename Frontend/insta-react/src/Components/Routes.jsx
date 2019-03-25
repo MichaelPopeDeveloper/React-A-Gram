@@ -9,13 +9,16 @@ import {
 import Home from './Home/Home';
 import NewsFeed from './NewsFeed'
 import Profile from './Profile/Profile';
+import Signup from './Signup/Signup';
+import Login from './Login/Login';
 
  const Routes = () => {
   return (
     <Router>
       <div>
         {/* <AuthButton /> */}
-        <Route path="/home" component={Home} />
+        <Route path="/home" component={Signup} />
+        <Route path="/login" component={Login} />
         <Route path="/newsfeed" component={NewsFeed} />
         <Route path="/profile" component={Profile} />
         {/* <Route path="/notes" component={Notes} />

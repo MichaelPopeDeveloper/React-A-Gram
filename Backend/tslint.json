@@ -7,6 +7,7 @@
         "function-name": [
             "allow-pascal-case"
         ],
-        "increment-decrement": true
+        "increment-decrement": true,
+        "align": [false, "parameters"]
     }
 }

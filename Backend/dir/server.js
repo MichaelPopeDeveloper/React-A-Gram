@@ -2,7 +2,11 @@
 exports.__esModule = true;
 var bodyParser = require("body-parser");
 var express = require("express");
+var session = require("express-session");
+var passport = require("passport");
 var logger = require("morgan");
+var UserRoute_1 = require("./routes/UserRoute");
+var mongoose_1 = require("mongoose");
 var Server = (function () {
     function Server() {
         this.port = process.env.PORT || 3001;
@@ -23,6 +27,15 @@ var Server = (function () {
         this.app.use(bodyParser.urlencoded({
             extended: true
         }));
+        this.app.use(session({
+            secret: 'midoria-shonen',
+            resave: false,
+            saveUninitialized: false
+        }));
+        this.app.use(passport.initialize());
+        this.app.use(passport.session());
+        mongoose_1.connect('mongodb://localhost:27017/react-a-gram', { useNewUrlParser: true })
+            .then(function () { return console.log('Connected to MongoDB'); })["catch"](function (err) { return console.log(err); });
     };
     Server.prototype.listen = function () {
         var _this = this;
@@ -31,7 +44,7 @@ var Server = (function () {
         });
     };
     Server.prototype.routes = function () {
-        this.app.use('/test', function (req, res) { return res.send('Go beyond!'); });
+        this.app.use('/user', UserRoute_1.userRoute);
     };
     return Server;
 }());
