@@ -5,7 +5,8 @@ import '../../styles/app.css';
 import { addArticle } from '../../actions/index';
 
 const mapStateToProps = state => {
-  return { articles: state.articles };
+  // return { articles: state.articles };
+  return { state };
 };
 
 function mapDispatchToProps(dispatch) {
@@ -49,6 +50,7 @@ class Login extends Component {
     const { username, email, password } = this.state;
     // console.log({ email, password });
     this.props.addArticle({title: username});
+    console.log('props', this.props);
     this.login({ username, email, password });
   }
 
@@ -90,5 +92,5 @@ class Login extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
