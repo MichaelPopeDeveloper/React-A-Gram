@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 import * as axios from 'axios';
+import { connect } from 'react-redux';
 import '../../styles/app.css';
+import { addArticle } from '../../actions/index';
+
+const mapStateToProps = state => {
+  return { articles: state.articles };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addArticle: article => dispatch(addArticle(article))
+  };
+}
 
 class Login extends Component {
   constructor() {
@@ -36,6 +48,7 @@ class Login extends Component {
     event.preventDefault();
     const { username, email, password } = this.state;
     // console.log({ email, password });
+    this.props.addArticle({title: username});
     this.login({ username, email, password });
   }
 
@@ -77,4 +90,5 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);
+
