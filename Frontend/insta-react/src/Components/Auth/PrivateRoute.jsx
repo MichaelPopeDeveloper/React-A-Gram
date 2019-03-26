@@ -6,13 +6,20 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  return { state };
+};
+
 
  const PrivateRoute = ({ component: Component, ...rest }) => {
+   console.log('state', state);
   return (
     <Route
       {...rest}
       render={props =>
-        props.auth.isAuthenticated ? (
+        state.user ? (
           <Component {...props} />
         ) : (
             <Redirect
@@ -26,3 +33,5 @@ import {
     />
   );
 };
+
+export default connect(mapStateToProps)(PrivateRoute);

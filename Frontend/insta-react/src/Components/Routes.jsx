@@ -11,16 +11,26 @@ import NewsFeed from './NewsFeed'
 import Profile from './Profile/Profile';
 import Signup from './Signup/Signup';
 import Login from './Login/Login';
+import PrivateRoute from './Auth/PrivateRoute';
+import { connect } from 'react-redux';
 
- const Routes = () => {
+const mapStateToProps = state => {
+  // return { articles: state.articles };
+  return { state };
+};
+
+
+
+ const Routes = (props) => {
+
   return (
-    <Router>
+    <Router >
       <div>
         {/* <AuthButton /> */}
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
-        <Route path="/newsfeed" component={NewsFeed} />
-        <Route path="/profile" component={Profile} />
+        <PrivateRoute path="/newsfeed" loggedIn={props.state.user} component={NewsFeed} />
+        <PrivateRoute path="/profile" loggedIn={props.state.user} component={Profile} />
         {/* <Route path="/notes" component={Notes} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} /> */}
@@ -38,4 +48,4 @@ class Test extends Component {
   }
 }
 
-export default Routes;
+export default connect(mapStateToProps)(Routes);

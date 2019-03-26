@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as axios from 'axios';
-import { connect } from 'react-redux';
 import '../../styles/app.css';
+import { connect } from 'react-redux';
 import { loginUser } from '../../actions/index';
 import Titlebar from '../TitleBar/Titlebar';
 

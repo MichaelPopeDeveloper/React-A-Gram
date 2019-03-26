@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
 import '../../styles/app.css';
 import Post from '../Posts/Post';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/index';
+
+const mapStateToProps = state => {
+  return { state };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loginUser: user => dispatch(loginUser(user))
+  };
+}
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    console.log(this.props);
+  }
+
   render() {
     return (
       <div>
@@ -54,4 +74,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

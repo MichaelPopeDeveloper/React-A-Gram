@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import * as axios from 'axios';
 import '../../styles/app.css';
 import Titlebar from '../TitleBar/Titlebar';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/index';
+
+const mapStateToProps = state => {
+  // return { articles: state.articles };
+  return { state };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loginUser: user => dispatch(loginUser(user))
+  };
+}
 
 class Signup extends Component {
   constructor() {
@@ -28,6 +41,7 @@ class Signup extends Component {
     })
       .then((res) => {
         console.log(res);
+        this.props.loginUser(res.data.user);
         //   this.setState({ name: decodedToken.name });
       })
       .catch(err => console.log(err));
@@ -89,4 +103,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
