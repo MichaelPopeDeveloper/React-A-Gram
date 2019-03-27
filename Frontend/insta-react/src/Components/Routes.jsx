@@ -13,24 +13,31 @@ import Signup from './Signup/Signup';
 import Login from './Login/Login';
 import PrivateRoute from './Auth/PrivateRoute';
 import { connect } from 'react-redux';
+import * as axios from 'axios';
 
 const mapStateToProps = state => {
   // return { articles: state.articles };
   return { state };
 };
 
+const auth = () => {
+  return axios.get('/user')
+    .then(result => result.data)
+    .catch(error => error);
+}
 
 
- const Routes = (props) => {
-
+const Routes = async (props) => {
+  // const val = await auth();
+  //console.log('response', val);
   return (
-    <Router >
+    <Router>
       <div>
         {/* <AuthButton /> */}
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
-        <PrivateRoute path="/newsfeed" loggedIn={props.state.user} component={NewsFeed} />
-        <PrivateRoute path="/profile" loggedIn={props.state.user} component={Profile} />
+        <PrivateRoute path="/newsfeed" loggedIn={props.state.user} auth={auth} component={NewsFeed} />
+        <PrivateRoute path="/profile" loggedIn={props.state.user} auth={auth} component={Profile} />
         {/* <Route path="/notes" component={Notes} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} /> */}
@@ -48,4 +55,4 @@ class Test extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Routes));
+export default connect(mapStateToProps)(Routes);

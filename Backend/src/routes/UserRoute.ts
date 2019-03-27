@@ -11,9 +11,9 @@ export const userRoute = router
     console.log('req.session', req.session);
     console.log('req.user', req.user);
     if (req.user) {
-      res.send('your logged in');
+      res.send({user: {username: req.user.username, posts: req.user.posts}});
     } else {
-      res.send('Bruh you not logged in');
+      res.send({user: false});
     }
   })
   .post('/login', (req, res, next) => {
