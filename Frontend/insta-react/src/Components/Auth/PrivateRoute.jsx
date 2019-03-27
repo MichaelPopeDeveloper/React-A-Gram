@@ -14,12 +14,11 @@ const mapStateToProps = state => {
 
 
  const PrivateRoute = ({ component: Component, ...rest }) => {
-   console.log('state', state);
   return (
     <Route
       {...rest}
       render={props =>
-        state.user ? (
+        props ? (
           <Component {...props} />
         ) : (
             <Redirect
@@ -34,4 +33,4 @@ const mapStateToProps = state => {
   );
 };
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default withRouter(connect(mapStateToProps)(PrivateRoute));

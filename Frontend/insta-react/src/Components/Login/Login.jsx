@@ -4,6 +4,7 @@ import '../../styles/app.css';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/index';
 import Titlebar from '../TitleBar/Titlebar';
+import {withRouter} from 'react-dom';
 
 const mapStateToProps = state => {
   // return { articles: state.articles };

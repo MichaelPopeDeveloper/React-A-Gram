@@ -48,4 +48,4 @@ class Test extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Routes);
+export default withRouter(connect(mapStateToProps)(Routes));
