@@ -34,14 +34,11 @@ const Routes = (props) => {
     <Router>
       <div>
         {/* <AuthButton /> */}
-        <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
+        <Route exact path="/" component={Test} />
+        <Route path="/signup" component={Signup} />
         <PrivateRoute path="/newsfeed"  component={NewsFeed} />
         <PrivateRoute path="/profile"  component={Profile} />
-        {/* <Route path="/notes" component={Notes} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={SignUp} /> */}
-        {/* <PrivateRoute path="/protected" component={Admin} /> */}
       </div>
     </Router>
   );

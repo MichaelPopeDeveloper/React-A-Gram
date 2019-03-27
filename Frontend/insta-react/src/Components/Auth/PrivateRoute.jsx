@@ -9,16 +9,16 @@ import {
 import { connect } from 'react-redux';
 import * as axios from 'axios';
 
-const mapStateToProps = state => {
-  return { state };
-};
+// const mapStateToProps = state => {
+//   return { state };
+// };
 
 
 class PrivateRoute extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: false
+      user: false,
     }
   }
 
@@ -28,44 +28,40 @@ class PrivateRoute extends React.Component {
   //     .catch(error => error);
   // }
 
-  authRender = () => {
-    // axios.get('/user')
-    //   .then(result => console.log(result))
-    //   .catch(error => error);
-    // if (this.state.user) {
-      return <this.props.component {...this.props} />
-    // } else {
-    //   return <Redirect
-    //     to={{
-    //       pathname: "/login",
-    //       state: { from: this.props.location }
-    //     }}
-    //   />
-    //}
-  }
+  // authRender = () => {
+  //   // axios.get('/user')
+  //   //   .then(result => console.log(result))
+  //   //   .catch(error => error);
+  //    if (this.state.user) {
+  //     console.log(this.state.user);
+  //     return <Route
+  //       path={this.props.path}
+  //       component={this.props.component}
+  //     />
+  //   } 
+  // }
 
   //render() {
-  render() {
-    return (
-      <div>
-        {this.authRender()}
-      </div>
-    )
+  render = () => {
+    const {user} = this.state;
+    if (!user) return <Redirect to="/login" />;
+    return (<h1>asdfjh</h1>);
+    // return this.authRender();
+    // this.state.user ? (
+    //   <Route
+    //   path={this.props.path}
+    //   component={this.props.component}
+    //   />
+    // ) : (
+    //   <Redirect
+    //         to={{
+    //           pathname: "/login",
+    //           state: { from: props.location }
+    //         }}
+    //       />
+    // );
   }
-
-  //  if (this.state.user === 77 ? (
-  //   <this.props.component {...props} />
-  // ) : (
-  //     <Redirect
-  //       to={{
-  //         pathname: "/login",
-  //         state: { from: props.location }
-  //       }}
-  //     />
-  //   )
-
-  // }
 }
 
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute; //connect(mapStateToProps)(PrivateRoute);
