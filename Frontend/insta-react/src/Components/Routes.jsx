@@ -20,14 +20,14 @@ const mapStateToProps = state => {
   return { state };
 };
 
-const auth = () => {
-  return axios.get('/user')
-    .then(result => result.data)
-    .catch(error => error);
-}
+// const auth = () => {
+//   return axios.get('/user')
+//     .then(result => result.data)
+//     .catch(error => error);
+// }
 
 
-const Routes = async (props) => {
+const Routes = (props) => {
   // const val = await auth();
   //console.log('response', val);
   return (
@@ -36,8 +36,8 @@ const Routes = async (props) => {
         {/* <AuthButton /> */}
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
-        <PrivateRoute path="/newsfeed" loggedIn={props.state.user} auth={auth} component={NewsFeed} />
-        <PrivateRoute path="/profile" loggedIn={props.state.user} auth={auth} component={Profile} />
+        <PrivateRoute path="/newsfeed"  component={NewsFeed} />
+        <PrivateRoute path="/profile"  component={Profile} />
         {/* <Route path="/notes" component={Notes} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} /> */}

@@ -14,37 +14,58 @@ const mapStateToProps = state => {
 };
 
 
-class PrivateRoute extends React.Component({ component: Component, auth, ...rest }) {
-constructor() {
-  super();
-}
+class PrivateRoute extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: false
+    }
+  }
 
-componentWillMount() {
-  axios.get('/user')
-  .then(result => console.log(result))
-  .catch(error => error);
-}
+  // componentDidMount() {
+  //    axios.get('/user')
+  //     .then(result => console.log(result))
+  //     .catch(error => error);
+  // }
 
+  authRender = () => {
+    // axios.get('/user')
+    //   .then(result => console.log(result))
+    //   .catch(error => error);
+    // if (this.state.user) {
+      return <this.props.component {...this.props} />
+    // } else {
+    //   return <Redirect
+    //     to={{
+    //       pathname: "/login",
+    //       state: { from: this.props.location }
+    //     }}
+    //   />
+    //}
+  }
+
+  //render() {
   render() {
     return (
-      <Route
-        {...rest}
-        render={props =>
-          true ? (
-            <Component {...props} />
-          ) : (
-              <Redirect
-                to={{
-                  pathname: "/login",
-                  state: { from: props.location }
-                }}
-              />
-            )
-        }
-      />
-    );
+      <div>
+        {this.authRender()}
+      </div>
+    )
   }
+
+  //  if (this.state.user === 77 ? (
+  //   <this.props.component {...props} />
+  // ) : (
+  //     <Redirect
+  //       to={{
+  //         pathname: "/login",
+  //         state: { from: props.location }
+  //       }}
+  //     />
+  //   )
+
+  // }
 }
- 
+
 
 export default connect(mapStateToProps)(PrivateRoute);
