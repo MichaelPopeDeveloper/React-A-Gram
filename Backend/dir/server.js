@@ -30,7 +30,8 @@ var Server = (function () {
         this.app.use(session({
             secret: 'midoria-shonen',
             resave: false,
-            saveUninitialized: false
+            saveUninitialized: false,
+            cookie: {}
         }));
         this.app.use(passport.initialize());
         this.app.use(passport.session());

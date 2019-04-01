@@ -1,7 +1,6 @@
 import { ADD_ARTICLE, LOGIN_USER, LOGOUT_USER } from "../constants/action-types";
 
 const initialState = {
-  articles: [],
   user: false,
 };
 

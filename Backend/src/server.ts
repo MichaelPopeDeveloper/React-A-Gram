@@ -85,6 +85,11 @@ export class Server {
         secret: 'midoria-shonen',
         resave: false,
         saveUninitialized: false,
+
+        cookie: {
+          // httpOnly: true,
+          // secure: true,
+        }
       }));
 
     this.app.use(passport.initialize());

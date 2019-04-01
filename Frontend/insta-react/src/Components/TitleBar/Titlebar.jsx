@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import '../../styles/app.css';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/index';
+import * as axios from 'axios';
 
 const mapStateToProps = state => {
-  // return { articles: state.articles };
   return { state };
 };
 
@@ -14,9 +14,19 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const logout = () => this.logout(false); // sets user to false in redux state
 
-const TitleBar = () => {
+
+const TitleBar = (props) => {
+  const logout = () => {
+    console.log(props);
+    props.logout(false); // sets user to false in redux state
+    axios.get('/user/logout')
+    .then(result => {
+      console.log('client logout store', props);
+      console.log('server response logout', result);
+    })
+  }
+
   return (
     <div>
       <div className="row fixed-top">
@@ -32,4 +42,4 @@ const TitleBar = () => {
   );
 }
 
-export default TitleBar;//connect(mapStateToProps, mapDispatchToProps)(TitleBar);
+export default connect(mapStateToProps, mapDispatchToProps)(TitleBar);

@@ -13,6 +13,7 @@ import Signup from './Signup/Signup';
 import Login from './Login/Login';
 import PrivateRoute from './Auth/PrivateRoute';
 import { connect } from 'react-redux';
+import { logoutUser } from '../actions/index';
 import * as axios from 'axios';
 
 const mapStateToProps = state => {
@@ -25,7 +26,11 @@ const mapStateToProps = state => {
 //     .then(result => result.data)
 //     .catch(error => error);
 // }
-
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: action => dispatch(logoutUser(action))
+  };
+}
 
 class Routes extends Component {
   constructor(props) {
@@ -36,18 +41,27 @@ class Routes extends Component {
     }
   }
 
+  
+
   componentWillMount() {
     this.auth()
   }
 
   auth = () => {
     console.log('props routes', this.props);
-    return axios.get('/user')
+     axios.get('/user')
       .then(result => {
-        this.setState({ user: result.data.user });
+        console.log('egg');
+        console.log('result', result);
+        if (result.status !== 200) {
+          this.props.logout(false);
+          console.log('after', this.props);
+        } else {
+          this.setState({ user: result.data.user });
+        }
         console.log('result routes', result);
       })
-      .catch(error => error);
+      .catch(error => this.props.logout(false)); //Display server error to user gracefully, not just keeping them logged out
   }
   // const val = await auth();
   //console.log('response', val);
@@ -73,4 +87,4 @@ class Test extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Routes);
+export default connect(mapStateToProps, mapDispatchToProps)(Routes);

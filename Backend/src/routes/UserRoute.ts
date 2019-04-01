@@ -9,11 +9,12 @@ const router = express.Router();
 export const userRoute = router
   .get('/', (req, res) => {
     console.log('req.session', req.session);
+    console.log('req.sessionID', req.sessionID);
     console.log('req.user', req.user);
     if (req.user) {
       res.send({user: {username: req.user.username, posts: req.user.posts}});
     } else {
-      res.send({user: false});
+      res.status(401).send({user: false});
     }
   })
   .post('/login', (req, res, next) => {
@@ -59,7 +60,14 @@ export const userRoute = router
       }
     })
   .get('/logout', (req, res, next) => {
-    console.log('logging out user....');
-    req.logout();
-    res.send('Logged out!');
+    if (req.user) {
+      req.session.destroy(null);
+      res.clearCookie('connect.sid');
+      console.log('logout user', req.user);
+      return res.json({msg: 'logged user out'});
+    } else {
+      res.json({msg: 'no user to log out'});
+    }
+   // req.logout();
+    //res.send('Logged out!');
   });
