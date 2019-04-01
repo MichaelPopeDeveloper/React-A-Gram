@@ -3,6 +3,7 @@ import '../../styles/app.css';
 import Login from '../Login/Login';
 import TitleBar from '../TitleBar/Titlebar';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 
 class Home extends Component {
@@ -15,12 +16,15 @@ class Home extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <TitleBar />
-        <Login />
-      </div>
-    );
+    return <Redirect
+      to={{ pathname: '/login' }}
+    />
+    // return (
+    //   <div>
+    //     <TitleBar />
+    //     <Login />
+    //   </div>
+    // );
   }
 }
 

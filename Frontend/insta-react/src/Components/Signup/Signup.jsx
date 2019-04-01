@@ -73,31 +73,31 @@ class Signup extends Component {
     return (
       <div>
         <Titlebar />
-     <div className="row">
-        <div className="col d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-          <div style={{ marginTop: '10vh' }}></div>
+        <div className="row">
+          <div className="col d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+            <div style={{ marginTop: '10vh' }}></div>
 
-          <h1 className="p-4">Signup</h1>
+            <h1 className="p-4">Signup</h1>
 
-          <form className="shadow p-5" onSubmit={this.handleSubmit}>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Username</label>
-              <input value={username} onChange={this.handleUsernameChange}  className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" />
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">email</label>
-              <input value={email} onChange={this.handleEmailChange} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-              <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input value={password} onChange={this.handlePaswordChange} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-            </div>
-            <button type="submit" className="btn btn-primary">Login</button>
-          </form>
+            <form className="shadow p-5" onSubmit={this.handleSubmit}>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input value={username} onChange={this.handleUsernameChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">email</label>
+                <input value={email} onChange={this.handleEmailChange} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input value={password} onChange={this.handlePaswordChange} type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+              </div>
+              <button type="submit" className="btn btn-primary">Login</button>
+            </form>
 
+          </div>
         </div>
-      </div>
       </div>
     );
   }

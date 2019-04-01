@@ -27,21 +27,42 @@ const mapStateToProps = state => {
 // }
 
 
-const Routes = (props) => {
+class Routes extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      user: false,
+    }
+  }
+
+  componentWillMount() {
+    this.auth()
+  }
+
+  auth = () => {
+    console.log('props routes', this.props);
+    return axios.get('/user')
+      .then(result => {
+        this.setState({ user: result.data.user });
+        console.log('result routes', result);
+      })
+      .catch(error => error);
+  }
   // const val = await auth();
   //console.log('response', val);
-  return (
-    <Router>
-      <div>
-        {/* <AuthButton /> */}
+
+  render = () => {
+    return (
+      <Router>
         <Route path="/login" component={Login} />
-        <Route exact path="/" component={Test} />
+        <Route exact path="/" component={Home} />
         <Route path="/signup" component={Signup} />
-        <PrivateRoute path="/newsfeed"  component={NewsFeed} />
-        <PrivateRoute path="/profile"  component={Profile} />
-      </div>
-    </Router>
-  );
+        <PrivateRoute path="/newsfeed" component={NewsFeed} />
+        <PrivateRoute path="/profile" component={Profile} />
+      </Router>
+    );
+  }
 }
 
 class Test extends Component {

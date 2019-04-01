@@ -1,10 +1,26 @@
 import { createStore, combineReducers } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
 import rootReducer from '../reducers/index';
 
-const store = createStore(rootReducer);
-store.subscribe(() => console.log('state', store.getState()));
+const persistConfig = {
+    key: 'root',
+    storage,
+}
 
-export default store;
-  
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export default () => {
+    let store = createStore(persistedReducer)
+    let persistor = persistStore(store)
+    return { store, persistor }
+}
+
+
+// const store = createStore(rootReducer);
+// store.subscribe(() => console.log('state', store.getState()));
+
+// export default store;
+
 
 

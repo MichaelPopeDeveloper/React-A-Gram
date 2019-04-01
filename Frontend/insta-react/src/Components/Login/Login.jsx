@@ -4,7 +4,7 @@ import '../../styles/app.css';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/index';
 import Titlebar from '../TitleBar/Titlebar';
-import {withRouter} from 'react-dom';
+import { withRouter } from 'react-dom';
 
 const mapStateToProps = state => {
   // return { articles: state.articles };
@@ -33,6 +33,10 @@ class Login extends Component {
     this.handlePaswordChange = this.handlePaswordChange.bind(this);
   }
 
+  componentWillMount() {
+    console.log('props login', this.props);
+  }
+
   login() {
     const { username, password } = this.state;
     axios.post('/user/login', {
@@ -42,6 +46,7 @@ class Login extends Component {
       .then((res) => {
         console.log(res);
         this.props.loginUser(res.data.user);
+        console.log(this.props);
         //   this.setState({ name: decodedToken.name });
       })
       .catch(err => console.log(err));

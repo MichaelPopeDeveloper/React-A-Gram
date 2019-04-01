@@ -38,34 +38,34 @@ class Profile extends Component {
         <div className="row">
           <div className="col-4 profile-col-pad">
             <div className="ProfileImageWrapper">
-            <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
             </div>
           </div>
           <div className="col-4 profile-col-pad">
             <div className="ProfileImageWrapper">
-            <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
             </div>
           </div>
           <div className="col-4 profile-col-pad">
             <div className="ProfileImageWrapper">
-            <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-4 profile-col-pad">
             <div className="ProfileImageWrapper">
-            <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
             </div>
           </div>
           <div className="col-4 profile-col-pad">
             <div className="ProfileImageWrapper">
-            <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
             </div>
           </div>
           <div className="col-4 profile-col-pad">
             <div className="ProfileImageWrapper">
-            <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
             </div>
           </div>
         </div>
