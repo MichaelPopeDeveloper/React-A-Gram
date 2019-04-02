@@ -36,6 +36,10 @@
   font-size: 80%;
 }
 
+.fixed-profile-row {
+  z-index: 1;
+}
+
 #ProfileTitleBar {
   width: 100%;
   min-height: 10vh;
@@ -59,6 +63,26 @@
 
 #Author-Description {
   padding-left: 1.3rem;
+}
+
+.menu {
+  position: fixed;
+  z-index: 2;
+}
+
+#menu-items li {
+  width: 100%;
+  padding: 0px;
+  min-height: 4rem;
+  list-style: none;
+  color: black;
+}
+#menu-items li:hover {
+  cursor: pointer;
+}
+
+.hover-pointer:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -51,6 +51,9 @@ $authorDescriptionCommentFS: 80%
 $ProfileImageWrapperHeight: 100%
 $ProfileHeaderFS: 220%
 
+.fixed-profile-row
+  z-index: 1
+
 #ProfileTitleBar
   width: $TitleBarWidth
   min-height: $TitleBarHeight
@@ -70,8 +73,28 @@ $ProfileHeaderFS: 220%
 
 #Author-Description
   padding-left: 1.3rem
+  
+
+//Menu styles
+.menu
+  position: fixed
+  z-index: 2
+
+#menu-items
+  li
+    width: 100%
+    padding: 0px
+    min-height: 4rem
+    list-style: none
+    color: black
+  li:hover
+    cursor: pointer
 
 
+  // Helper classes
+.hover-pointer
+.hover-pointer:hover
+  cursor: pointer
 
     
 

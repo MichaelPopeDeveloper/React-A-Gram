@@ -3,6 +3,7 @@ import '../../styles/app.css';
 import Post from '../Posts/Post';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/index';
+import  Menu  from '../Menu/Menu';
 
 const mapStateToProps = state => {
   return { state };
@@ -26,11 +27,13 @@ class Profile extends Component {
   render() {
     return (
       <div>
+        <Menu/>
         {/* Turn into individual header component */}
-        <div className="row fixed-top">
+        <div className="row fixed-top fixed-profile-row">
           <div className="col d-flex justify-content-between align-items-center shadow" id="ProfileTitleBar">
-            <h2 className="text-black text-center pl-4 profile-header-text">RandomUser123</h2>
-            <i class="fas fa-bars pr-4 profile-header-text"></i>
+            <h2 className="text-black text-center pl-4 profile-header-text">{this.props.state.user.username}</h2>
+             {/* <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-push">Push</button>  */}
+            <i class="fas fa-bars pr-4 profile-header-text hover-pointer"  uk-toggle="target: #offcanvas-push"></i>
           </div>
         </div>
         <div style={{ marginTop: '10vh' }}>

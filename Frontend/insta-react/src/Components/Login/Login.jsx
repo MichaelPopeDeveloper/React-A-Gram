@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import * as axios from 'axios';
 import '../../styles/app.css';
 import { connect } from 'react-redux';
+import {
+  Redirect,
+} from "react-router-dom";
 import { loginUser } from '../../actions/index';
 import Titlebar from '../TitleBar/Titlebar';
 import { withRouter } from 'react-dom';
@@ -25,6 +28,7 @@ class Login extends Component {
       email: '',
       password: '',
       authenticated: false,
+      errorMessage: ''
     };
     this.login = this.login.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -76,6 +80,13 @@ class Login extends Component {
 
   render() {
     const { username, email, password } = this.state;
+    const { user } = this.props.state;
+    if (user) return <Redirect
+      to={{
+        pathname: "/profile",
+        state: { from: this.props.location }
+      }}
+    />
     return (
       <div>
         <Titlebar />
@@ -83,9 +94,13 @@ class Login extends Component {
           <div className="col d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
             <div style={{ marginTop: '10vh' }}></div>
 
-            <h1 className="p-4">Login</h1>
+            <h1 className="p-4 pb-0 mb-0">Login</h1>
+            {/* Programatically display error message here */}
+            <h3 className="p-0 m-0 mb-3 text-secondary">{this.state.errorMessage}</h3>
 
             <form className="shadow p-5" onSubmit={this.handleSubmit}>
+            {/* Add link to signup component */}
+            <p>Not a member? <span className="text-secondary">Sign Up</span></p>
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input value={username} onChange={this.handleUsernameChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" />

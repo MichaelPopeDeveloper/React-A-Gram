@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+  Redirect,
+} from "react-router-dom";
 import * as axios from 'axios';
 import '../../styles/app.css';
 import Titlebar from '../TitleBar/Titlebar';
@@ -70,6 +73,13 @@ class Signup extends Component {
 
   render() {
     const { username, email, password } = this.state;
+    const { user } = this.props.state;
+    if (user) return <Redirect
+      to={{
+        pathname: "/profile",
+        state: { from: this.props.location }
+      }}
+    />
     return (
       <div>
         <Titlebar />
