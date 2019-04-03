@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import '../../styles/app.css';
+
+const mapStateToProps = state => {
+  return { state };
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    // logout: action => dispatch(logoutUser(action))
+  };
+}
 
 class Post extends Component {
   render() {
     return (
+      // fix image not covering entire backgrond on right side on large screens
       <div className="row">
         <div className="col d-flex flex-column justify-content-center align-items-center" id="Post">
           <div className="post-wrapper d-flex flex-column">
@@ -11,10 +23,10 @@ class Post extends Component {
               <div className="author-post-img-wrapper d-flex justify-content-center align-items-center">
                 <img className="rounded img-post img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
               </div>
-              <b className="post-author-username pl-3">Random User</b>
+              <b className="post-author-username pl-3">{ this.props.state.user.username }</b>
             </div>
             <div className="post-img-wrapper">
-              <img className="img-post img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
             </div>
             <div className="w-100 d-flex flex-column justify-content-start pt-2">
               <p className="text-left pb-0 mb-0 author-description-comment" id="Author-Description"> <b className="pr-2">User</b> My adventure through Japan was incredible! I hope I can come back again!</p>
@@ -27,4 +39,4 @@ class Post extends Component {
   }
 }
 
-export default Post;
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

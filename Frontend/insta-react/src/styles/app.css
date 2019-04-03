@@ -85,4 +85,13 @@
   cursor: pointer;
 }
 
+#CreatePostWrapper {
+  min-height: 100vh;
+}
+
+.create-post-panel {
+  min-height: 70vh;
+  padding: 4rem;
+}
+
 /*# sourceMappingURL=app.css.map */

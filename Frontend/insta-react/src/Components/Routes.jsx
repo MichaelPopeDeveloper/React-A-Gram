@@ -11,21 +11,19 @@ import NewsFeed from './NewsFeed'
 import Profile from './Profile/Profile';
 import Signup from './Signup/Signup';
 import Login from './Login/Login';
+import CreatePost from './Posts/CreatePost';
 import PrivateRoute from './Auth/PrivateRoute';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/index';
 import * as axios from 'axios';
+import Menu from './Menu/Menu';
+
+
 
 const mapStateToProps = state => {
-  // return { articles: state.articles };
   return { state };
 };
 
-// const auth = () => {
-//   return axios.get('/user')
-//     .then(result => result.data)
-//     .catch(error => error);
-// }
 function mapDispatchToProps(dispatch) {
   return {
     logout: action => dispatch(logoutUser(action))
@@ -51,7 +49,6 @@ class Routes extends Component {
     console.log('props routes', this.props);
      axios.get('/user')
       .then(result => {
-        console.log('egg');
         console.log('result', result);
         if (result.status !== 200) {
           this.props.logout(false);
@@ -63,26 +60,18 @@ class Routes extends Component {
       })
       .catch(error => this.props.logout(false)); //Display server error to user gracefully, not just keeping them logged out
   }
-  // const val = await auth();
-  //console.log('response', val);
 
   render = () => {
     return (
       <Router>
+        <Menu />
         <Route path="/login" component={Login} />
         <Route exact path="/" component={Home} />
         <Route path="/signup" component={Signup} />
+        <PrivateRoute path="/createpost" component={CreatePost} />
         <PrivateRoute path="/newsfeed" component={NewsFeed} />
         <PrivateRoute path="/profile" component={Profile} />
       </Router>
-    );
-  }
-}
-
-class Test extends Component {
-  render() {
-    return (
-      <h1 className="text-center">Testing! 1, 2, 3!</h1>
     );
   }
 }
