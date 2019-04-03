@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../styles/app.css';
-import Post from './Posts/Post';
-import TitleBar from './TitleBar/Titlebar';
+import '../../styles/app.css';
+import Post from '../Posts/Post';
+import TitleBar from '../TitleBar/Titlebar';
 
 class NewsFeed extends Component {
   render() {

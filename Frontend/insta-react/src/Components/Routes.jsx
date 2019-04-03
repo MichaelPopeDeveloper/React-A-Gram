@@ -7,7 +7,7 @@ import {
   withRouter
 } from "react-router-dom";
 import Home from './Home/Home';
-import NewsFeed from './NewsFeed'
+import NewsFeed from './NewsFeed/NewsFeed'
 import Profile from './Profile/Profile';
 import Signup from './Signup/Signup';
 import Login from './Login/Login';
