@@ -34,7 +34,7 @@ class CreatePost extends Component {
         axios.get(`https://api.unsplash.com/search/photos?page=1&per_page=18&query=${imageSearchText.replace(/\s+/g, '+')}&client_id=4c1f5525e6dcace5b7a268ca4f5ac18f69dd4b46f3b01226b4287772783938e4`)
             .then(result => {
                 console.log(result)
-                this.setState({ retrievedImages: result.data.results })
+                this.setState({ retrievedImages: result.data.results });
                 this.handleRetrievedImages();
             })
             .catch(error => console.log(error));
@@ -42,9 +42,11 @@ class CreatePost extends Component {
 
     handleRetrievedImages = () => {
         const { retrievedImages } = this.state;
+        //TODO: display error to client if no images are recieved
+        // Refactor the logic below for clarity
         if (retrievedImages.length > 0) {
 
-            const groupedImages = [[]];
+            const groupedImages = [[]]; 
             retrievedImages.map((image, index) => {
                 const currentImageGroup = groupedImages[groupedImages.length - 1];
                 if (currentImageGroup.length < 2) {
@@ -98,7 +100,7 @@ class CreatePost extends Component {
                             {finalImageGroups.length > 0 ? finalImageGroups.map(image => {
                                 console.log('image element', image);
                                 return image;
-                            }) : 'No images were found'}
+                            }) : 'No images were found' /* Fix this to only display error when request to the API has already been made */}
                         </div>
                     </div>
                 </div>
