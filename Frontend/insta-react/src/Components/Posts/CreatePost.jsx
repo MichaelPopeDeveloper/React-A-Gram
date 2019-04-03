@@ -46,7 +46,7 @@ class CreatePost extends Component {
         // Refactor the logic below for clarity
         if (retrievedImages.length > 0) {
 
-            const groupedImages = [[]]; 
+            const groupedImages = [[]];
             retrievedImages.map((image, index) => {
                 const currentImageGroup = groupedImages[groupedImages.length - 1];
                 if (currentImageGroup.length < 2) {
@@ -64,7 +64,7 @@ class CreatePost extends Component {
                             return (
                                 <div className="col-4 profile-col-pad">
                                     <div className="ProfileImageWrapper">
-                                        <img className="img-fluid hover-pointer" onClick={(event) => console.log(event.target.attributes.getNamedItem('data').value)} src={image.urls.raw} data={image.urls.raw}/>
+                                        <img className="img-fluid hover-pointer" onClick={(event) => console.log(event.target.attributes.getNamedItem('data').value)} src={image.urls.raw} data={image.urls.raw} />
                                     </div>
                                 </div>
                             )
@@ -72,7 +72,7 @@ class CreatePost extends Component {
                     </div>
                 );
             });
-            return this.setState({finalImageGroups});
+            return this.setState({ finalImageGroups });
         }
     }
 
@@ -87,20 +87,23 @@ class CreatePost extends Component {
             <div>
                 <Titlebar />
                 <div className="row">
-                <div style={{minHeight: '15vh'}}>
+                    <div style={{ minHeight: '15vh' }}>
 
-                </div>
+                    </div>
                 </div>
                 <div className="row">
                     <div className="col d-flex flex-column justify-content-center align-items-center" id="CreatePostWrapper">
                         <div className="shadow w-75 create-post-panel d-flex flex-column justify-content-start align-items-center">
-                            <form className="p-4 w-100" onSubmit={this.handleSubmit}>
-                                <input className="form-control" value={imageSearchText} onChange={this.handleImageSearchText}></input>
-                            </form>
-                            {finalImageGroups.length > 0 ? finalImageGroups.map(image => {
-                                console.log('image element', image);
-                                return image;
-                            }) : 'No images were found' /* Fix this to only display error when request to the API has already been made */}
+                        <h1>Select a Photo to Post</h1>
+                            <div className="d-flex flex-column justify-content-start align-items-center" style={{overflowX: 'hidden', position: 'relative',  width: '100%', height: '100%', /*left: '-9999px'*/}} id="Photo-Search-Wrapper">
+                                <form className="p-4 w-100" onSubmit={this.handleSubmit}>
+                                    <input placeholder="Search for a photo..." className="form-control" value={imageSearchText} onChange={this.handleImageSearchText}></input>
+                                </form>
+                                {finalImageGroups.length > 0 ? finalImageGroups.map(image => {
+                                    console.log('image element', image);
+                                    return image;
+                                }) : 'No images were found' /* Fix this to only display error when request to the API has already been made */}
+                            </div>
                         </div>
                     </div>
                 </div>
