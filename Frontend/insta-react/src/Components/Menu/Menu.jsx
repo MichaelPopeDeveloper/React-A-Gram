@@ -15,17 +15,13 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-
-
 const Menu = (props) => {
   const logout = () => {
     console.log(props);
     props.logout(false); // sets user to false in redux state
     axios.get('/user/logout')
-    .then(result => {
-      console.log('client logout store', props);
-      console.log('server response logout', result);
-    })
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
   }
 
   return (
@@ -38,8 +34,6 @@ const Menu = (props) => {
           <Link to='/newsfeed' activeClassName="active"> <li>Newsfeed</li> </Link>
           <li onClick={logout} uk-toggle="target: #offcanvas-push">Logout</li>
         </ul>
-
-
     </div>
 </div>
   );

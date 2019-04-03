@@ -27,7 +27,6 @@ class Login extends Component {
       username: '',
       email: '',
       password: '',
-      authenticated: false,
       errorMessage: ''
     };
     this.login = this.login.bind(this);
@@ -35,10 +34,6 @@ class Login extends Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePaswordChange = this.handlePaswordChange.bind(this);
-  }
-
-  componentWillMount() {
-    console.log('props login', this.props);
   }
 
   login() {
@@ -50,8 +45,6 @@ class Login extends Component {
       .then((res) => {
         console.log(res);
         this.props.loginUser(res.data.user);
-        console.log(this.props);
-        //   this.setState({ name: decodedToken.name });
       })
       .catch(err => console.log(err));
   }
@@ -60,8 +53,6 @@ class Login extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const { username, email, password } = this.state;
-    // console.log({ email, password });
-    console.log('props', this.props);
     this.login({ username, email, password });
   }
 
@@ -99,8 +90,8 @@ class Login extends Component {
             <h3 className="p-0 m-0 mb-3 text-secondary">{this.state.errorMessage}</h3>
 
             <form className="shadow p-5" onSubmit={this.handleSubmit}>
-            {/* Add link to signup component */}
-            <p>Not a member? <span className="text-secondary">Sign Up</span></p>
+              {/* Add link to signup component */}
+              <p>Not a member? <span className="text-secondary">Sign Up</span></p>
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input value={username} onChange={this.handleUsernameChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" />

@@ -34,6 +34,8 @@ class Profile extends Component {
             <i class="fas fa-bars pr-4 profile-header-text hover-pointer"  uk-toggle="target: #offcanvas-push"></i>
           </div>
         </div>
+        {/* End of header component */}
+        
         <div style={{ marginTop: '10vh' }}>
         </div>
         <div className="row">
