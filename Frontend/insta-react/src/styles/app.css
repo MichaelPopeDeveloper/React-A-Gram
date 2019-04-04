@@ -90,8 +90,12 @@
 }
 
 .create-post-panel {
-  min-height: 70vh;
+  min-height: 100vh;
   padding: 2rem;
+}
+.create-post-panel ::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 /*# sourceMappingURL=app.css.map */
