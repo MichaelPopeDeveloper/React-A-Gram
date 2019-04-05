@@ -80,11 +80,12 @@ class CreatePost extends Component {
         }
     }
 
-    handlePostPhotoToFeed = () => {
-        const {selectedImageUrl, postDescriptionText}  = this.state;
-        axios.post('/post', { imageURL: selectedImageUrl, postDescription: postDescriptionText})
-        .then(result => console.log(result))
-        .catch(error => console.log(error));
+    handlePostPhotoToFeed = (event) => {
+        event.preventDefault();
+        const { selectedImageUrl, postDescriptionText } = this.state;
+        axios.post('/user/createPost', { imageURL: selectedImageUrl, postDescription: postDescriptionText })
+            .then(result => console.log(result))
+            .catch(error => console.log(error));
     }
 
     handlePostImageClick = (event) => {
@@ -128,7 +129,7 @@ class CreatePost extends Component {
                             <div className="d-flex flex-column justify-content-start align-items-center p-5" style={{ overflowX: 'hidden', overflowY: 'scroll', position: 'absolute', width: '100%', height: '100%', left: postPhotoPanelHide }} id="Photo-Search-Wrapper">
                                 <h3>Add back button</h3>
                                 <h1>Share your photo</h1>
-                                <form className="p-4 w-100" onSubmit={this.handleSubmit}>
+                                <form className="p-4 w-100" onSubmit={this.handlePostPhotoToFeed}>
                                     <textarea placeholder="Description..." className="form-control" value={postDescriptionText} onChange={this.handlePostDescriptionText}></textarea>
                                     <button className="btn btn-primary p-2 m-1">Share</button>
                                 </form>

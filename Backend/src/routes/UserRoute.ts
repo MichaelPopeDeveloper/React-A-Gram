@@ -12,9 +12,9 @@ export const userRoute = router
     console.log('req.sessionID', req.sessionID);
     console.log('req.user', req.user);
     if (req.user) {
-      res.send({user: {username: req.user.username, posts: req.user.posts}});
+      res.send({ user: { username: req.user.username, posts: req.user.posts } });
     } else {
-      res.status(401).send({user: false});
+      res.status(401).send({ user: false });
     }
   })
   .post('/login', (req, res, next) => {
@@ -25,8 +25,8 @@ export const userRoute = router
     (req, res) => {
       console.log('req.user', req.user);
       if (req.user) {
-        const {username, email, posts} = req.user;
-        res.send({user: {username, email, posts}});
+        const { username, email, posts } = req.user;
+        res.send({ user: { username, email, posts } });
       } else {
         res.sendStatus(401);
       }
@@ -53,8 +53,8 @@ export const userRoute = router
     (req, res) => {
       console.log('req.user', req.user);
       if (req.user) {
-        const {username, email, posts} = req.user;
-        res.send({user: {username, email, posts}});
+        const { username, email, posts } = req.user;
+        res.send({ user: { username, email, posts } });
       } else {
         res.sendStatus(401);
       }
@@ -64,10 +64,33 @@ export const userRoute = router
       req.session.destroy(null);
       res.clearCookie('connect.sid');
       console.log('logout user', req.user);
-      return res.json({msg: 'logged user out'});
+      return res.json({ msg: 'logged user out' });
     } else {
-      res.json({msg: 'no user to log out'});
+      res.json({ msg: 'no user to log out' });
     }
-   // req.logout();
+    // req.logout();
     //res.send('Logged out!');
+  })
+  .post('/createPost', (req, res) => {
+    const { imageURL, postDescriptionText } = req.body;
+    if (req.user) {
+      User.findByIdAndUpdate({ _id: req.user._id },
+        {
+          $push:
+          {
+            posts:
+            {
+              description: postDescriptionText,
+              imageURL,
+              created_at: new (Date.now() as any),
+              comments: [],
+            }
+          }
+        })
+        .then(result => res.send(result))
+        .catch(error => res.send(error));
+      return;
+    } else {
+      return res.status(401).send({ user: false });
+    }
   });

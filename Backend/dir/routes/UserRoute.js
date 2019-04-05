@@ -67,5 +67,25 @@ exports.userRoute = router
     else {
         res.json({ msg: 'no user to log out' });
     }
+})
+    .post('/createPost', function (req, res) {
+    var _a = req.body, imageURL = _a.imageURL, postDescriptionText = _a.postDescriptionText;
+    if (req.user) {
+        User_1.User.findByIdAndUpdate({ _id: req.user._id }, {
+            $push: {
+                posts: {
+                    description: postDescriptionText,
+                    imageURL: imageURL,
+                    created_at: new (Date.now()),
+                    comments: []
+                }
+            }
+        })
+            .then(function (result) { return res.send(result); })["catch"](function (error) { return res.send(error); });
+        return;
+    }
+    else {
+        return res.status(401).send({ user: false });
+    }
 });
 //# sourceMappingURL=UserRoute.js.map
