@@ -74,9 +74,9 @@ exports.userRoute = router
         User_1.User.findByIdAndUpdate({ _id: req.user._id }, {
             $push: {
                 posts: {
-                    description: postDescriptionText,
                     imageURL: imageURL,
-                    created_at: new (Date.now()),
+                    description: postDescriptionText,
+                    created_at: new Date(),
                     comments: []
                 }
             }
@@ -84,8 +84,6 @@ exports.userRoute = router
             .then(function (result) { return res.send(result); })["catch"](function (error) { return res.send(error); });
         return;
     }
-    else {
-        return res.status(401).send({ user: false });
-    }
+    return res.status(401).send({ user: false });
 });
 //# sourceMappingURL=UserRoute.js.map

@@ -69,7 +69,7 @@ export const userRoute = router
       res.json({ msg: 'no user to log out' });
     }
     // req.logout();
-    //res.send('Logged out!');
+    // res.send('Logged out!');
   })
   .post('/createPost', (req, res) => {
     const { imageURL, postDescriptionText } = req.body;
@@ -80,17 +80,16 @@ export const userRoute = router
           {
             posts:
             {
-              description: postDescriptionText,
               imageURL,
-              created_at: new (Date.now() as any),
+              description: postDescriptionText,
+              created_at: new Date(),
               comments: [],
-            }
-          }
+            },
+          },
         })
         .then(result => res.send(result))
         .catch(error => res.send(error));
       return;
-    } else {
-      return res.status(401).send({ user: false });
     }
+    return res.status(401).send({ user: false });
   });
