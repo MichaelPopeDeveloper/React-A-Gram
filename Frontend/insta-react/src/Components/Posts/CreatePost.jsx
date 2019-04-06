@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../styles/app.css';
 import Titlebar from '../TitleBar/Titlebar';
@@ -24,7 +25,8 @@ class CreatePost extends Component {
             selectedImageUrl: '',
             postDescriptionText: '',
             selectPhotoPanelHide: '0px',
-            postPhotoPanelHide: '9999px'
+            postPhotoPanelHide: '9999px',
+            postShared: false,
         }
     }
 
@@ -84,7 +86,11 @@ class CreatePost extends Component {
         event.preventDefault();
         const { selectedImageUrl, postDescriptionText } = this.state;
         axios.post('/user/createPost', { imageURL: selectedImageUrl, postDescription: postDescriptionText })
-            .then(result => console.log(result))
+            .then(result => {
+                if (result.status === 200) {
+                    this.setState({ postShared: true });
+                }
+            })
             .catch(error => console.log(error));
     }
 
@@ -104,7 +110,8 @@ class CreatePost extends Component {
 
 
     render() {
-        const { imageSearchText, postDescriptionText, selectedImageUrl, finalImageGroups, selectPhotoPanelHide, postPhotoPanelHide } = this.state;
+        const { imageSearchText, postDescriptionText, selectedImageUrl, finalImageGroups, selectPhotoPanelHide, postPhotoPanelHide, postShared } = this.state;
+        if (postShared) return <Redirect to="/newsfeed" />
         return (
             <div>
                 <Titlebar />

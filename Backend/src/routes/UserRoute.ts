@@ -87,8 +87,17 @@ export const userRoute = router
             },
           },
         })
-        .then(result => res.send(result))
+        .then(result => console.log(result))
         .catch(error => res.send(error));
+      User.findById(req.user._id)
+        .then((user) => {
+          if (user) {
+            delete (user as any).password; // clean user
+            res.status(200).send({ user });
+          } else {
+            res.status(401).send({ msg: 'error' }); // change this to error status code
+          }
+        });
       return;
     }
     return res.status(401).send({ user: false });
