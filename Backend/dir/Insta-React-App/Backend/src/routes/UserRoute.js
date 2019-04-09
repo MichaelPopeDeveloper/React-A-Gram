@@ -11,11 +11,10 @@ exports.userRoute = router
     console.log('req.sessionID', req.sessionID);
     console.log('req.user', req.user);
     if (req.user) {
-        var user = Object.assign({}, req.user._doc);
-        delete user.password;
-        delete user._id;
-        console.log('assign user', user);
-        res.send({ user: user });
+        var assignUser = Object.assign({}, req.user);
+        delete assignUser.password;
+        delete assignUser._id;
+        res.send({ assignUser: assignUser });
     }
     else {
         res.status(401).send({ user: false });
@@ -27,11 +26,11 @@ exports.userRoute = router
 }, passport.authenticate('local'), function (req, res) {
     console.log('req.user', req.user);
     if (req.user) {
-        var user = Object.assign({}, req.user._doc);
-        delete user.password;
-        delete user._id;
-        console.log('assign user', user);
-        res.send({ user: user });
+        var assignUser = Object.assign({}, req.user);
+        delete assignUser.password;
+        delete assignUser._id;
+        console.log('assign user', assignUser);
+        res.send({ assignUser: assignUser });
     }
     else {
         res.sendStatus(401);

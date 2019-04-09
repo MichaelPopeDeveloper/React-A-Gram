@@ -12,7 +12,7 @@
         ]
     },
     "include": [
-        "src/**/*", "../../Michaels_Portfolio/Portfolio_Website/Backend/Portfolio_Backend/src/Routes/AppsRoute.ts"
+        "src/**/*",
     ],
     "exclude": [
         "node_modules",

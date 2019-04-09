@@ -47,7 +47,13 @@ class Profile extends Component {
               return (
                 <div className="col-4 profile-col-pad">
                   <div className="ProfileImageWrapper">
-                    <img className="img-fluid hover-pointer" style={{height: 'auto', minWidth: '35rem'}} src={post.imageURL} data={post.imageURL} />
+                  <div className="hover-pointer" 
+                  style={{
+                    background: `url(${post.imageURL}) no-repeat center center fixed`,
+                    backgroundS: 'cover',
+                    minHeight: '10rem',
+                  }}> </div>
+                    {/* <img className="img-fluid hover-pointer" style={{height: 'auto', minWidth: '35rem'}} src={post.imageURL} data={post.imageURL} /> */}
                   </div>
                 </div>
               )

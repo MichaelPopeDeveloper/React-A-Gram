@@ -12,7 +12,11 @@ export const userRoute = router
     console.log('req.sessionID', req.sessionID);
     console.log('req.user', req.user);
     if (req.user) {
-      res.send({ user: { username: req.user.username, posts: req.user.posts } });
+      const user = Object.assign({}, req.user._doc);
+      delete user.password;
+      delete user._id;
+      console.log('assign user', user);
+      res.send({ user });
     } else {
       res.status(401).send({ user: false });
     }
@@ -25,8 +29,11 @@ export const userRoute = router
     (req, res) => {
       console.log('req.user', req.user);
       if (req.user) {
-        const { username, email, posts } = req.user;
-        res.send({ user: { username, email, posts } });
+        const user = Object.assign({}, req.user._doc);
+        delete user.password;
+        delete user._id;
+        console.log('assign user', user);
+        res.send({ user });
       } else {
         res.sendStatus(401);
       }
@@ -53,8 +60,10 @@ export const userRoute = router
     (req, res) => {
       console.log('req.user', req.user);
       if (req.user) {
-        const { username, email, posts } = req.user;
-        res.send({ user: { username, email, posts } });
+        const assignUser = Object.assign({}, req.user);
+        delete assignUser.password;
+        delete assignUser._id;
+        res.send({ assignUser });
       } else {
         res.sendStatus(401);
       }
@@ -65,9 +74,8 @@ export const userRoute = router
       res.clearCookie('connect.sid');
       console.log('logout user', req.user);
       return res.json({ msg: 'logged user out' });
-    } else {
-      res.json({ msg: 'no user to log out' });
     }
+    return res.json({ msg: 'no user to log out' });
     // req.logout();
     // res.send('Logged out!');
   })
