@@ -69,7 +69,7 @@ exports.userRoute = router
     }
 })
     .post('/createPost', function (req, res) {
-    var _a = req.body, imageURL = _a.imageURL, postDescriptionText = _a.postDescriptionText;
+    var _a = req.body, username = _a.username, imageURL = _a.imageURL, postDescriptionText = _a.postDescriptionText;
     if (req.user) {
         User_1.User.findByIdAndUpdate({ _id: req.user._id }, {
             $push: {
@@ -78,10 +78,28 @@ exports.userRoute = router
                     description: postDescriptionText,
                     created_at: new Date(),
                     comments: []
+                },
+                newsfeed: {
+                    username: username,
+                    imageURL: imageURL,
+                    description: postDescriptionText,
+                    created_at: new Date(),
+                    comments: []
                 }
             }
         })
-            .then(function (result) { return res.send(result); })["catch"](function (error) { return res.send(error); });
+            .then(function (result) { return console.log(result); })["catch"](function (error) { return res.send(error); });
+        User_1.User.findById(req.user._id)
+            .then(function (user) {
+            if (user) {
+                delete user.password;
+                delete user._id;
+                res.status(200).send({ user: user });
+            }
+            else {
+                res.status(401).send({ msg: 'error' });
+            }
+        });
         return;
     }
     return res.status(401).send({ user: false });

@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../styles/app.css';
 import Titlebar from '../TitleBar/Titlebar';
+import { updateUser } from '../../actions/index'
 import * as axios from 'axios';
 
 const mapStateToProps = state => {
@@ -11,7 +12,7 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        // logout: action => dispatch(logoutUser(action))
+         updateUser: user => dispatch(updateUser(user))
     };
 }
 
@@ -85,10 +86,15 @@ class CreatePost extends Component {
     handlePostPhotoToFeed = (event) => {
         event.preventDefault();
         const { selectedImageUrl, postDescriptionText } = this.state;
-        axios.post('/user/createPost', { imageURL: selectedImageUrl, postDescription: postDescriptionText })
+        axios.post('/user/createPost', { username: this.props.state.user.username, imageURL: selectedImageUrl, postDescriptionText })
             .then(result => {
                 if (result.status === 200) {
+                    console.log(result);
+                    const { user } = result.data;
+                    this.props.updateUser(user);
+                    console.log('create post user check', this.props);
                     this.setState({ postShared: true });
+
                 }
             })
             .catch(error => console.log(error));

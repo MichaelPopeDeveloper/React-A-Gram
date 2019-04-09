@@ -72,7 +72,7 @@ export const userRoute = router
     // res.send('Logged out!');
   })
   .post('/createPost', (req, res) => {
-    const { imageURL, postDescriptionText } = req.body;
+    const { username, imageURL, postDescriptionText } = req.body;
     if (req.user) {
       User.findByIdAndUpdate({ _id: req.user._id },
         {
@@ -80,6 +80,14 @@ export const userRoute = router
           {
             posts:
             {
+              imageURL,
+              description: postDescriptionText,
+              created_at: new Date(),
+              comments: [],
+            },
+            newsfeed:
+            {
+              username,
               imageURL,
               description: postDescriptionText,
               created_at: new Date(),
@@ -93,6 +101,7 @@ export const userRoute = router
         .then((user) => {
           if (user) {
             delete (user as any).password; // clean user
+            delete (user as any)._id;
             res.status(200).send({ user });
           } else {
             res.status(401).send({ msg: 'error' }); // change this to error status code

@@ -46,6 +46,46 @@ var UserSchema = new mongoose.Schema({
                         required: true
                     }
                 }]
+        }],
+    newsfeed: [{
+            username: {
+                type: String,
+                required: true
+            },
+            description: {
+                type: String,
+                required: false
+            },
+            imageURL: {
+                type: String,
+                required: false
+            },
+            created_at: {
+                type: Date,
+                required: true
+            },
+            likes: {
+                type: Number,
+                required: false
+            },
+            comments: [{
+                    username: {
+                        type: String,
+                        required: true
+                    },
+                    comment: {
+                        type: String,
+                        required: true
+                    },
+                    likes: {
+                        type: Number,
+                        required: false
+                    },
+                    created_at: {
+                        type: Date,
+                        required: true
+                    }
+                }]
         }]
 });
 exports.User = mongoose.model('User', UserSchema);
