@@ -16,7 +16,7 @@ class Post extends Component {
 
   mapNewsfeedPosts = () => {
     const { user } = this.props.state;
-    return user.newsfeed.map((post, index) => {
+    return [...user.newsfeed].reverse().map((post, index) => {
       return (
         <div className="row">
         <div className="col d-flex flex-column justify-content-center align-items-center" id="Post">

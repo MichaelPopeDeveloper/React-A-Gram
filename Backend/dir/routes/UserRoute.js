@@ -95,18 +95,19 @@ exports.userRoute = router
                 }
             }
         })
-            .then(function (result) { return console.log(result); })["catch"](function (error) { return res.send(error); });
-        User_1.User.findById(req.user._id)
-            .then(function (user) {
-            if (user) {
-                delete user.password;
-                delete user._id;
-                res.status(200).send({ user: user });
-            }
-            else {
-                res.status(401).send({ msg: 'error' });
-            }
-        });
+            .then(function (result) {
+            User_1.User.findById(req.user._id)
+                .then(function (user) {
+                if (user) {
+                    delete user.password;
+                    delete user._id;
+                    res.status(200).send({ user: user });
+                }
+                else {
+                    res.status(401).send({ msg: 'error' });
+                }
+            });
+        })["catch"](function (error) { return res.send(error); });
         return;
     }
     return res.status(401).send({ user: false });

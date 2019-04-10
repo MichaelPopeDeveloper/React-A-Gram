@@ -48,7 +48,7 @@ class Routes extends Component {
   auth = () => {
     axios.get('/user')
       .then(result => {
-        if (result.status !== 200) return this.props.logout(false);
+        if (result.status === 200) return this.props.login(false);
         return this.setState({ user: result.data.user });
       })
       .catch(error => this.props.logout(false)); //Display server error to user gracefully, not just keeping them logged out

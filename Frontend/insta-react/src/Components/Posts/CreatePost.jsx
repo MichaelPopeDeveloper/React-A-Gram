@@ -28,6 +28,7 @@ class CreatePost extends Component {
             selectPhotoPanelHide: '0px',
             postPhotoPanelHide: '9999px',
             postShared: false,
+            shouldUpdateUser: false,
         }
     }
 

@@ -5,10 +5,17 @@ import {
 } from "react-router-dom";
 import * as axios from 'axios';
 import { connect } from 'react-redux';
+import { loginUser } from '../../actions/index';
 
 const mapStateToProps = state => {
   return { state };
 };
+
+function mapDispatchToProps(dispatch) {
+  return {
+    login: action => dispatch(loginUser(action))
+  };
+}
 
 
 class PrivateRoute extends Component {
@@ -27,7 +34,8 @@ class PrivateRoute extends Component {
   authRender = () => {
     axios.get('/user')
       .then(result => {
-        this.setState({ user: result.data.user, isLoaded: true });
+        this.props.login(result.data.user);
+       // this.setState({ user: result.data.user, isLoaded: true });
         // console.log('result private', result);
         console.log('props private', this.props)
       })
@@ -125,4 +133,4 @@ const PrivateRouteStateless = ({ component: Component, auth, ...rest }) => {
 }
 
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);

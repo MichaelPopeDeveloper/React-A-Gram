@@ -50,7 +50,7 @@ class Profile extends Component {
                   <div className="hover-pointer" 
                   style={{
                     background: `url(${post.imageURL}) no-repeat center center fixed`,
-                    backgroundS: 'cover',
+                    backgroundSize: 'conver',
                     minHeight: '10rem',
                   }}> </div>
                     {/* <img className="img-fluid hover-pointer" style={{height: 'auto', minWidth: '35rem'}} src={post.imageURL} data={post.imageURL} /> */}
