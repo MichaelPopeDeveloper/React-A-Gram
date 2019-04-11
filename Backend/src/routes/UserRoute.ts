@@ -119,4 +119,43 @@ export const userRoute = router
       return;
     }
     return res.status(401).send({ user: false });
+  })
+  .post('/editPost', (req, res) => {
+    const { postDescriptionText, imageURL } = req.body;
+    if (req.user) {
+      console.log('imageURL', imageURL);
+      User.findOneAndUpdate({ "posts.imageURL": imageURL },
+        {
+          $set:
+          {
+            "posts.$.description": postDescriptionText,
+          },
+        })
+        .then((result) => {
+          console.log('posts update', result);
+          User.findOneAndUpdate({ "newsfeed.imageURL": imageURL },
+            {
+              $set:
+              {
+                "newsfeed.$.description": postDescriptionText,
+              },
+            })
+            .then(result => console.log('newsfeed update', result));
+        })
+        .then((result) => {
+          User.findById(req.user._id)
+            .then((user) => {
+              if (user) {
+                delete (user as any).password; // clean user
+                delete (user as any)._id;
+                res.status(200).send({ user });
+              } else {
+                res.status(401).send({ msg: 'error' }); // change this to error status code
+              }
+            });
+        })
+        .catch(error => res.send(error));
+      return;
+    }
+    return res.status(401).send({ user: false });
   });

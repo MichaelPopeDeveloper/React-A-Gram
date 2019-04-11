@@ -111,5 +111,40 @@ exports.userRoute = router
         return;
     }
     return res.status(401).send({ user: false });
+})
+    .post('/editPost', function (req, res) {
+    var _a = req.body, postDescriptionText = _a.postDescriptionText, imageURL = _a.imageURL;
+    if (req.user) {
+        console.log('imageURL', imageURL);
+        User_1.User.findOneAndUpdate({ "posts.imageURL": imageURL }, {
+            $set: {
+                "posts.$.description": postDescriptionText
+            }
+        })
+            .then(function (result) {
+            console.log('posts update', result);
+            User_1.User.findOneAndUpdate({ "newsfeed.imageURL": imageURL }, {
+                $set: {
+                    "newsfeed.$.description": postDescriptionText
+                }
+            })
+                .then(function (result) { return console.log('newsfeed update', result); });
+        })
+            .then(function (result) {
+            User_1.User.findById(req.user._id)
+                .then(function (user) {
+                if (user) {
+                    delete user.password;
+                    delete user._id;
+                    res.status(200).send({ user: user });
+                }
+                else {
+                    res.status(401).send({ msg: 'error' });
+                }
+            });
+        })["catch"](function (error) { return res.send(error); });
+        return;
+    }
+    return res.status(401).send({ user: false });
 });
 //# sourceMappingURL=UserRoute.js.map

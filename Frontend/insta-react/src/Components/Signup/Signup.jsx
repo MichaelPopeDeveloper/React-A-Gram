@@ -45,7 +45,6 @@ class Signup extends Component {
       .then((res) => {
         console.log(res);
         this.props.loginUser(res.data.user);
-        //   this.setState({ name: decodedToken.name });
       })
       .catch(err => console.log(err));
   }
@@ -53,9 +52,7 @@ class Signup extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { username, email, password } = this.state;
-    // console.log({ email, password });
-    this.login({ username, email, password });
+    this.login();
   }
 
   handleUsernameChange(event) {

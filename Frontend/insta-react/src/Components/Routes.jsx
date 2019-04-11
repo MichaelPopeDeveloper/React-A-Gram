@@ -4,7 +4,8 @@ import {
   Route,
   Link,
   Redirect,
-  withRouter
+  withRouter,
+  Switch
 } from "react-router-dom";
 import Home from './Home/Home';
 import NewsFeed from './NewsFeed/NewsFeed'
@@ -13,6 +14,7 @@ import Signup from './Signup/Signup';
 import Login from './Login/Login';
 import CreatePost from './Posts/CreatePost';
 import PrivateRoute from './Auth/PrivateRoute';
+import EditPost from './Posts/EditPost';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/index';
 import * as axios from 'axios';
@@ -62,6 +64,7 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/signup" component={Signup} />
         <PrivateRoute path="/createpost" component={CreatePost} />
+        <PrivateRoute path="/edit" component={EditPost} />
         <PrivateRoute path="/newsfeed" component={NewsFeed} />
         <PrivateRoute path="/profile" component={Profile} />
       </Router>

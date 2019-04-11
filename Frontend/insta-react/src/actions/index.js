@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, LOGIN_USER, LOGOUT_USER, UPDATE_USER } from '../constants/action-types';
+import { ADD_ARTICLE, LOGIN_USER, LOGOUT_USER, UPDATE_USER, EDIT_POST } from '../constants/action-types';
 
 export function addArticle(payload) {
   return { type: ADD_ARTICLE, payload }
@@ -14,4 +14,12 @@ export function logoutUser(payload) {
 
 export function updateUser(payload) {
   return { type: UPDATE_USER, payload }
+};
+
+export function editPost(payload) {
+  return { type: EDIT_POST, payload }
+};
+
+export function clearEditPost(payload) {
+  return { type: EDIT_POST, payload }
 };
