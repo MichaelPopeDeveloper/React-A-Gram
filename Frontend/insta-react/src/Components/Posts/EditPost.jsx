@@ -148,6 +148,7 @@ class CreatePost extends Component {
                                 <form className="p-4 w-100" onSubmit={this.handlePostPhotoToFeed}>
                                     <textarea placeholder="Description..." className="form-control" value={postDescriptionText} onChange={this.handlePostDescriptionText}>Hello</textarea>
                                     <button className="btn btn-primary p-2 m-1">Share</button>
+                                    <button className="btn btn-warning p-2 m-1">Delete</button>
                                 </form>
                                 <div className="row">
                                     <div className="col">

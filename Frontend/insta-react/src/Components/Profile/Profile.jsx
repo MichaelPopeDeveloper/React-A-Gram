@@ -45,13 +45,13 @@ class Profile extends Component {
           <div className="row">
             {imageGroup.map(post => {
               return (
-                <div className="col-4 profile-col-pad">
+                <div className="col-lg-4 profile-col-pad" style={{minHeight: '20rem'}}>
                   <div className="ProfileImageWrapper">
                   <div className="hover-pointer" 
                   style={{
-                    background: `url(${post.imageURL}) no-repeat center center fixed`,
-                    backgroundSize: 'conver',
-                    minHeight: '10rem',
+                    background: `url(${post.imageURL}) no-repeat center center`,
+                    backgroundSize: 'cover',
+                    minHeight: '100%',
                   }}> </div>
                     {/* <img className="img-fluid hover-pointer" style={{height: 'auto', minWidth: '35rem'}} src={post.imageURL} data={post.imageURL} /> */}
                   </div>
@@ -80,40 +80,6 @@ class Profile extends Component {
 
         <div style={{ marginTop: '10vh' }}>
         </div>
-        {/* <div className="row">
-          <div className="col-4 profile-col-pad">
-            <div className="ProfileImageWrapper">
-              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-            </div>
-          </div>
-          <div className="col-4 profile-col-pad">
-            <div className="ProfileImageWrapper">
-              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-            </div>
-          </div>
-          <div className="col-4 profile-col-pad">
-            <div className="ProfileImageWrapper">
-              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-4 profile-col-pad">
-            <div className="ProfileImageWrapper">
-              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-            </div>
-          </div>
-          <div className="col-4 profile-col-pad">
-            <div className="ProfileImageWrapper">
-              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-            </div>
-          </div>
-          <div className="col-4 profile-col-pad">
-            <div className="ProfileImageWrapper">
-              <img className="img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
-            </div>
-          </div>
-        </div> */}
         {this.mapProfilePosts()}
       </div>
     );

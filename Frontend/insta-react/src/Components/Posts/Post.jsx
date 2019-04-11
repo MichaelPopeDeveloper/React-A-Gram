@@ -12,18 +12,15 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-     editPost: action => dispatch(editPost(action))
+    editPost: action => dispatch(editPost(action))
   };
 }
 
-const EditDropdownProto = ({post, ...props}) => {
-  const setPostToState = () => {
-    props.editPost(post);
-    console.log('props', props);
-  };
-
-return <a className="dropdown-item"  onClick={setPostToState} href="#">Edit</a>;
+const EditDropdownProto = ({ post, ...props }) => {
+  const setPostToState = () => props.editPost(post);
+  return <a className="dropdown-item" onClick={setPostToState} href="#">Edit</a>;
 }
+
 const EditDropdown = connect(mapStateToProps, mapDispatchToProps)(EditDropdownProto);
 
 class Post extends Component {
@@ -34,18 +31,10 @@ class Post extends Component {
     }
   }
 
-  directToEditPost = (event) => {
-    // this.setState({ editPost: post });
-  }
-
-  
-
-  
-
   mapNewsfeedPosts = () => {
     const { user } = this.props.state;
     return [...user.newsfeed].reverse().map((post, index) => {
-     console.log('Post props', this.props);
+      console.log('Post props', this.props);
       return (
         <div className="row">
           <div className="col d-flex flex-column justify-content-center align-items-center" id="Post">
@@ -62,12 +51,7 @@ class Post extends Component {
                     Action
   </button>
                   <div className="dropdown-menu">
-                    {/* <a className="dropdown-item"  onClick={this.directToEditPost} href="#">Edit</a> */}
                     <EditDropdown post={post} onClickFunction={this.directToEditPost} />
-                    <a className="dropdown-item"  onClick={() => { }} href="#">Delete</a>
-                    {/* <a className="dropdown-item" href="#">Something else here</a>
-                    <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" href="#">Separated link</a> */}
                   </div>
                 </div>
               </div>
@@ -88,11 +72,11 @@ class Post extends Component {
   render() {
     if (this.props.state.postToEdit) {
       return <Redirect
-      to={{
-        pathname: "/edit",
-      }}
-    />
-    } 
+        to={{
+          pathname: "/edit",
+        }}
+      />
+    }
     return (
       // fix image not covering entire backgrond on right side on large screens
       <div>
