@@ -158,4 +158,39 @@ export const userRoute = router
       return;
     }
     return res.status(401).send({ user: false });
+  })
+  .post('/deletePost', (req, res) => {
+    const { username, imageURL, postDescriptionText } = req.body;
+    if (req.user) {
+      User.findOneAndUpdate({ _id: req.user._id },
+        {
+          $pull:
+          {
+            "posts": { imageURL }
+          },
+        })
+        .then((result) => {
+          console.log('delete post', result);
+          User.findOneAndUpdate({ _id: req.user._id },
+            {
+              $pull: { "newsfeed": { imageURL } },
+            })
+        })
+        .then(result => {
+          console.log('delete newsfeed', result);
+          User.findById(req.user._id)
+            .then((user) => {
+              if (user) {
+                delete (user as any).password; // clean user
+                delete (user as any)._id;
+                res.status(200).send({ user });
+              } else {
+                res.status(401).send({ msg: 'error' }); // change this to error status code
+              }
+            });
+        })
+        .catch(error => res.send(error));
+      return;
+    }
+    return res.status(401).send({ user: false });
   });

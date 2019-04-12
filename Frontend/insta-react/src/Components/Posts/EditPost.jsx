@@ -101,6 +101,22 @@ class CreatePost extends Component {
             .catch(error => console.log(error));
     }
 
+    handleDeletePost = (event) => {
+        event.preventDefault();
+        const { postDescriptionText, selectedImageUrl } = this.state;
+        axios.post('/user/deletePost', { postID: this.props.state.postToEdit._id, postDescriptionText, imageURL: selectedImageUrl })
+            .then(result => {
+                if (result.status === 200) {
+                    console.log(result);
+                    const { user } = result.data;
+                    this.props.updateUser(user);
+                    this.props.clearEditPost();
+                    this.setState({ postShared: true });
+                }
+            })
+            .catch(error => console.log(error));
+    }
+
     handlePostImageClick = (event) => {
         const selectedImageUrl = event.target.attributes.getNamedItem('data').value;
         this.setState({ selectedImageUrl, selectPhotoPanelHide: '-9999px', postPhotoPanelHide: '0px' });
@@ -145,10 +161,10 @@ class CreatePost extends Component {
                             <div className="d-flex flex-column justify-content-start align-items-center p-5" style={{ overflowX: 'hidden', overflowY: 'scroll', position: 'absolute', width: '100%', height: '100%', }} id="Photo-Search-Wrapper">
                                 <h3>Add back button</h3>
                                 <h1>Edit Post</h1>
-                                <form className="p-4 w-100" onSubmit={this.handlePostPhotoToFeed}>
+                                <form className="p-4 w-100" onSubmit={(event) => event.preventDefault()}>
                                     <textarea placeholder="Description..." className="form-control" value={postDescriptionText} onChange={this.handlePostDescriptionText}>Hello</textarea>
-                                    <button className="btn btn-primary p-2 m-1">Share</button>
-                                    <button className="btn btn-warning p-2 m-1">Delete</button>
+                                    <button className="btn btn-primary p-2 m-1" onClick={this.handlePostPhotoToFeed}>Share</button>
+                                    <button className="btn btn-warning p-2 m-1" onClick={this.handleDeletePost}>Delete</button>
                                 </form>
                                 <div className="row">
                                     <div className="col">

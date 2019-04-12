@@ -146,5 +146,37 @@ exports.userRoute = router
         return;
     }
     return res.status(401).send({ user: false });
+})
+    .post('/deletePost', function (req, res) {
+    var _a = req.body, username = _a.username, imageURL = _a.imageURL, postDescriptionText = _a.postDescriptionText;
+    if (req.user) {
+        User_1.User.findOneAndUpdate({ _id: req.user._id }, {
+            $pull: {
+                "posts": { imageURL: imageURL }
+            }
+        })
+            .then(function (result) {
+            console.log('delete post', result);
+            User_1.User.findOneAndUpdate({ _id: req.user._id }, {
+                $pull: { "newsfeed": { imageURL: imageURL } }
+            });
+        })
+            .then(function (result) {
+            console.log('delete newsfeed', result);
+            User_1.User.findById(req.user._id)
+                .then(function (user) {
+                if (user) {
+                    delete user.password;
+                    delete user._id;
+                    res.status(200).send({ user: user });
+                }
+                else {
+                    res.status(401).send({ msg: 'error' });
+                }
+            });
+        })["catch"](function (error) { return res.send(error); });
+        return;
+    }
+    return res.status(401).send({ user: false });
 });
 //# sourceMappingURL=UserRoute.js.map
