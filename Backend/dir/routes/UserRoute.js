@@ -149,7 +149,7 @@ exports.userRoute = router
     return res.status(401).send({ user: false });
 })
     .post('/deletePost', function (req, res) {
-    var _a = req.body, username = _a.username, imageURL = _a.imageURL, postDescriptionText = _a.postDescriptionText;
+    var imageURL = req.body.imageURL;
     if (req.user) {
         User_1.User.findOneAndUpdate({ _id: req.user._id }, {
             $pull: {

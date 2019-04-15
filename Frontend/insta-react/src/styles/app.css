@@ -6,6 +6,20 @@
 }
 #TitleBar h2 {
   font-family: Pacifico;
+  font-size: 140%;
+}
+@media (min-width: 600px) {
+  #TitleBar h2 {
+    font-size: 200%;
+  }
+}
+#TitleBar .title-icon {
+  font-size: 140%;
+}
+@media (min-width: 600px) {
+  #TitleBar .title-icon {
+    font-size: 200%;
+  }
 }
 
 .post-image-wrapper {

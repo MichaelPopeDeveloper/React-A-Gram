@@ -10,6 +10,7 @@ var mongoose_1 = require("mongoose");
 var Server = (function () {
     function Server() {
         this.port = process.env.PORT || 3001;
+        this.DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/react-a-gram';
         this.app = express();
         this.config();
         this.routes();
@@ -35,7 +36,7 @@ var Server = (function () {
         }));
         this.app.use(passport.initialize());
         this.app.use(passport.session());
-        mongoose_1.connect('mongodb://localhost:27017/react-a-gram', { useNewUrlParser: true })
+        mongoose_1.connect(this.DB_URL, { useNewUrlParser: true })
             .then(function () { return console.log('Connected to MongoDB'); })["catch"](function (err) { return console.log(err); });
     };
     Server.prototype.listen = function () {

@@ -16,6 +16,7 @@ import { connect } from 'mongoose';
 export class Server {
   private port: any = process.env.PORT || 3001;
   public app: express.Application;
+  private DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/react-a-gram';
 
   /**
    * Bootstrap the application.
@@ -95,7 +96,7 @@ export class Server {
     this.app.use(passport.initialize());
     this.app.use(passport.session());
 
-    connect('mongodb://localhost:27017/react-a-gram', { useNewUrlParser: true })
+    connect(this.DB_URL, { useNewUrlParser: true })
      .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err));
 

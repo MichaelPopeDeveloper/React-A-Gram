@@ -42,9 +42,9 @@ class Post extends Component {
               <div className="w-100 d-flex flex-row justify-content-between align-items-center pt-2 mb-2" id="Author-Post-Header">
                 <div className="d-flex justify-content-start align-items-center">
                   <div className="author-post-img-wrapper d-flex justify-content-center align-items-center">
-                    <img className="rounded img-post img-fluid" src="https://images.pexels.com/photos/590478/pexels-photo-590478.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" />
+                    <img className="rounded img-post img-fluid m-4 ml-5" style={{minWidth: '3rem'}} src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" />
                   </div>
-                  <b className="post-author-username pl-3">{user.username}</b>
+                  <b className="post-author-username pl-3 ml-3">{user.username}</b>
                 </div>
                 <div className="btn-group mr-4">
                   <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,8 +59,8 @@ class Post extends Component {
                 <img className="img-fluid" src={post.imageURL} />
               </div>
               <div className="w-100 d-flex flex-column justify-content-start pt-2">
-                <p className="text-left pb-0 mb-0 author-description-comment" id="Author-Description"> <b className="pr-2">{post.username}</b>{post.description}</p>
-                <p className="text-secondary pt-1 author-description-comment" id="Author-Description">View all comments</p>
+                <p className="text-left pb-0 mb-0 author-description-comment" id="Author-Description" style={{fontSize: '85%'}}> <b className="pr-2">{post.username}</b>{post.description}</p>
+                {/* <p className="text-secondary pt-1 author-description-comment" id="Author-Description">View all comments</p> */}
               </div>
             </div>
           </div>
