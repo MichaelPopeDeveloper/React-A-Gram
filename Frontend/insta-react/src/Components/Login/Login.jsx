@@ -4,6 +4,7 @@ import '../../styles/app.css';
 import { connect } from 'react-redux';
 import {
   Redirect,
+  Link,
 } from "react-router-dom";
 import { loginUser } from '../../actions/index';
 import Titlebar from '../TitleBar/Titlebar';
@@ -70,7 +71,7 @@ class Login extends Component {
 
 
   render() {
-    const { username, email, password } = this.state;
+    const { username, password } = this.state;
     const { user } = this.props.state;
     if (user) return <Redirect
       to={{
@@ -91,7 +92,7 @@ class Login extends Component {
 
             <form className="shadow p-5" onSubmit={this.handleSubmit}>
               {/* Add link to signup component */}
-              <p>Not a member? <span className="text-secondary">Sign Up</span></p>
+              <p>Not a member? <Link to="/signup"><span className="text-secondary">Sign Up</span></Link></p>
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input value={username} onChange={this.handleUsernameChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" />

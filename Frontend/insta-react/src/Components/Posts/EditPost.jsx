@@ -148,16 +148,6 @@ class CreatePost extends Component {
                 <div className="row">
                     <div className="col d-flex flex-column justify-content-center align-items-center" id="CreatePostWrapper">
                         <div className=" w-75 create-post-panel" style={{ overflow: 'hidden', position: 'relative' }}>
-                            {/* <div className="d-flex flex-column justify-content-start align-items-center p-5" style={{ overflowX: 'hidden', overflowY: 'scroll', position: 'absolute', width: '100%', height: '100%', left: selectPhotoPanelHide }} id="Photo-Search-Wrapper">
-                                <h1>Select a Photo to Post</h1>
-                                <form className="p-4 w-100" onSubmit={this.getSearchedPhotos}>
-                                    <input placeholder="Search for a photo..." className="form-control" value={imageSearchText} onChange={this.handleImageSearchText}></input>
-                                </form>
-                                {finalImageGroups.length > 0 ? finalImageGroups.map(image => {
-                                    console.log('image element', image);
-                                    return image;
-                                }) : 'No images were found' COMMENT Fix this to only display error when request to the API has already been made }
-                            </div> */}
                             <div className="d-flex flex-column justify-content-start align-items-center p-5" style={{ overflowX: 'hidden', overflowY: 'scroll', position: 'absolute', width: '100%', height: '100%', }} id="Photo-Search-Wrapper">
                                 <h3>Add back button</h3>
                                 <h1>Edit Post</h1>

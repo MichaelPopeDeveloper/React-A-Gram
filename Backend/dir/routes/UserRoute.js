@@ -57,10 +57,11 @@ exports.userRoute = router
 }, passport.authenticate('local'), function (req, res) {
     console.log('req.user', req.user);
     if (req.user) {
-        var assignUser = Object.assign({}, req.user);
-        delete assignUser.password;
-        delete assignUser._id;
-        res.send({ assignUser: assignUser });
+        var user = Object.assign({}, req.user._doc);
+        delete user.password;
+        delete user._id;
+        console.log('assign user', user);
+        res.send({ user: user });
     }
     else {
         res.sendStatus(401);
@@ -154,29 +155,32 @@ exports.userRoute = router
             $pull: {
                 "posts": { imageURL: imageURL }
             }
+        })["catch"](function (error) {
+            console.log('posts delete error', error);
         })
             .then(function (result) {
             console.log('delete post', result);
             User_1.User.findOneAndUpdate({ _id: req.user._id }, {
-                $pull: { "newsfeed": { imageURL: imageURL } }
-            });
-        })
-            .then(function (result) {
-            console.log('delete newsfeed', result);
-            User_1.User.findById(req.user._id)
-                .then(function (user) {
-                if (user) {
-                    delete user.password;
-                    delete user._id;
-                    res.status(200).send({ user: user });
+                $pull: {
+                    "newsfeed": { imageURL: imageURL }
                 }
-                else {
-                    res.status(401).send({ msg: 'error' });
-                }
+            })
+                .then(function (result) {
+                console.log('newsfeed delete', result);
+                User_1.User.findById(req.user._id)
+                    .then(function (user) {
+                    if (user) {
+                        delete user.password;
+                        delete user._id;
+                        res.status(200).send({ user: user });
+                    }
+                })["catch"](function (error) {
+                    res.send(error);
+                });
+            })["catch"](function (error) {
+                console.log('newsfeed delete error', error);
             });
-        })["catch"](function (error) { return res.send(error); });
-        return;
+        });
     }
-    return res.status(401).send({ user: false });
 });
 //# sourceMappingURL=UserRoute.js.map

@@ -60,10 +60,11 @@ export const userRoute = router
     (req, res) => {
       console.log('req.user', req.user);
       if (req.user) {
-        const assignUser = Object.assign({}, req.user);
-        delete assignUser.password;
-        delete assignUser._id;
-        res.send({ assignUser });
+        const user = Object.assign({}, req.user._doc);
+        delete user.password;
+        delete user._id;
+        console.log('assign user', user);
+        res.send({ user });
       } else {
         res.sendStatus(401);
       }
@@ -160,7 +161,7 @@ export const userRoute = router
     return res.status(401).send({ user: false });
   })
   .post('/deletePost', (req, res) => {
-    const { username, imageURL, postDescriptionText } = req.body;
+    const { imageURL } = req.body;
     if (req.user) {
       User.findOneAndUpdate({ _id: req.user._id },
         {
@@ -169,28 +170,35 @@ export const userRoute = router
             "posts": { imageURL }
           },
         })
+        .catch(error => {
+          console.log('posts delete error', error);
+        })
         .then((result) => {
           console.log('delete post', result);
           User.findOneAndUpdate({ _id: req.user._id },
             {
-              $pull: { "newsfeed": { imageURL } },
+              $pull:
+              {
+                "newsfeed": { imageURL }
+              },
             })
-        })
-        .then(result => {
-          console.log('delete newsfeed', result);
-          User.findById(req.user._id)
-            .then((user) => {
-              if (user) {
-                delete (user as any).password; // clean user
-                delete (user as any)._id;
-                res.status(200).send({ user });
-              } else {
-                res.status(401).send({ msg: 'error' }); // change this to error status code
-              }
-            });
-        })
-        .catch(error => res.send(error));
-      return;
+            .then(result => {
+              console.log('newsfeed delete', result);
+              User.findById(req.user._id)
+                .then((user) => {
+                  if (user) {
+                    delete (user as any).password; // clean user
+                    delete (user as any)._id;
+                    res.status(200).send({ user });
+                  } 
+                })
+                .catch(error => {
+                  res.send(error);
+                })
+            })
+            .catch(error => {
+              console.log('newsfeed delete error', error);
+            })
+        });
     }
-    return res.status(401).send({ user: false });
   });

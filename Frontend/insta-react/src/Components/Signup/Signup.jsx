@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   Redirect,
+  Link,
 } from "react-router-dom";
 import * as axios from 'axios';
 import '../../styles/app.css';
@@ -87,6 +88,7 @@ class Signup extends Component {
             <h1 className="p-4">Signup</h1>
 
             <form className="shadow p-5" onSubmit={this.handleSubmit}>
+            <p>Already a Member? <Link to="/login"><span className="text-secondary">Login</span></Link></p>
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input value={username} onChange={this.handleUsernameChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" />
