@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import {
+  Redirect
+} from 'react-router-dom';
 import '../../styles/app.css';
 import Post from '../Posts/Post';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions/index';
+import { loginUser, displayPost, navigateToEdit, navigateToDisplay } from '../../actions/index';
 
 const mapStateToProps = state => {
   return { state };
@@ -10,13 +13,19 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    loginUser: user => dispatch(loginUser(user))
+    loginUser: user => dispatch(loginUser(user)),
+    displayPost: post => dispatch(displayPost(post)),
+    navigateToEdit: navigate => dispatch(navigateToEdit(navigate)),
+    navigateToDisplay: navigate => dispatch(navigateToDisplay(navigate)),
   };
 }
 
 class Profile extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      redirectToPost: false,
+    }
   }
 
   componentWillMount() {
@@ -45,14 +54,19 @@ class Profile extends Component {
           <div className="row">
             {imageGroup.map(post => {
               return (
-                <div className="col-lg-4 profile-col-pad" style={{minHeight: '20rem'}}>
+                <div className="col-lg-4 profile-col-pad" style={{ minHeight: '20rem' }}>
                   <div className="ProfileImageWrapper">
-                  <div className="hover-pointer" 
-                  style={{
-                    background: `url(${post.imageURL}) no-repeat center center`,
-                    backgroundSize: 'cover',
-                    minHeight: '100%',
-                  }}> </div>
+                    <div className="hover-pointer"
+                      style={{
+                        background: `url(${post.imageURL}) no-repeat center center`,
+                        backgroundSize: 'cover',
+                        minHeight: '100%',
+                      }} onClick={() => {
+                        this.props.navigateToEdit(false);
+                        console.log('post', post);
+                        this.props.displayPost(post);
+                        this.props.navigateToDisplay(true);
+                      }}> </div>
                     {/* <img className="img-fluid hover-pointer" style={{height: 'auto', minWidth: '35rem'}} src={post.imageURL} data={post.imageURL} /> */}
                   </div>
                 </div>
@@ -66,6 +80,14 @@ class Profile extends Component {
   }
 
   render() {
+    const { navigateToDisplay } = this.props.state.navigation;
+    if (navigateToDisplay) {
+      return <Redirect
+        to={{
+          pathname: "/post",
+        }}
+      />
+    }
     return (
       <div>
         {/* Turn into individual header component */}

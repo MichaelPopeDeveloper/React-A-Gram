@@ -13,10 +13,11 @@ import Profile from './Profile/Profile';
 import Signup from './Signup/Signup';
 import Login from './Login/Login';
 import CreatePost from './Posts/CreatePost';
+import PostDisplay from './Posts/PostDisplay';
 import PrivateRoute from './Auth/PrivateRoute';
 import EditPost from './Posts/EditPost';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions/index';
+import { logoutUser, navigateToDisplay, navigateToEdit } from '../actions/index';
 import * as axios from 'axios';
 import Menu from './Menu/Menu';
 
@@ -28,7 +29,9 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
   return {
-    logout: action => dispatch(logoutUser(action))
+    logout: action => dispatch(logoutUser(action)),
+    navigateToEdit: navigate => dispatch(navigateToEdit(navigate)),
+    navigateToDisplay: navigate => dispatch(navigateToDisplay(navigate)),
   };
 }
 
@@ -44,7 +47,9 @@ class Routes extends Component {
 
 
   componentWillMount() {
-    this.auth()
+    this.auth();
+    this.props.navigateToEdit(false);
+    this.props.navigateToDisplay(false);
   }
 
   auth = () => {
@@ -64,6 +69,7 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/signup" component={Signup} />
         <PrivateRoute path="/createpost" component={CreatePost} />
+        <PrivateRoute path="/post" component={PostDisplay} />
         <PrivateRoute path="/edit" component={EditPost} />
         <PrivateRoute path="/newsfeed" component={NewsFeed} />
         <PrivateRoute path="/profile" component={Profile} />

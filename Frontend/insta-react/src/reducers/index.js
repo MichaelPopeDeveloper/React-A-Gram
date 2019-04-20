@@ -1,6 +1,11 @@
-import { ADD_ARTICLE, LOGIN_USER, LOGOUT_USER, UPDATE_USER, EDIT_POST, CLEAR_EDIT_POST } from "../constants/action-types";
+import { ADD_ARTICLE, LOGIN_USER, LOGOUT_USER, UPDATE_USER, EDIT_POST, CLEAR_EDIT_POST, DISPLAY_POST, CLEAR_DISPLAY_POST, NAVIGATE_TO_EDIT_POST, NAVIGATE_TO_DISPLAY_POST } from "../constants/action-types";
 
 const initialState = {
+  navigation: {
+    navigateToEdit: false,
+    navigateToDisplay: false,
+  },
+  postToDisplay: false,
   postToEdit: false,
   user: false,
 };
@@ -36,6 +41,26 @@ function rootReducer(state = initialState, action) {
   if (action.type === CLEAR_EDIT_POST) {
     return Object.assign({}, state, {
       postToEdit: state.postToEdit = false,
+    });
+  }
+  if (action.type === DISPLAY_POST) {
+    return Object.assign({}, state, {
+      postToDisplay: state.postToDisplay = action.payload,
+    });
+  }
+  if (action.type === CLEAR_DISPLAY_POST) {
+    return Object.assign({}, state, {
+      postToDisplay: state.postToDisplay = false,
+    });
+  }
+  if (action.type === NAVIGATE_TO_EDIT_POST) {
+    return Object.assign({}, state, {
+      navigation: { ...state.navigation,  navigateToEdit: action.payload},
+    });
+  }
+  if (action.type === NAVIGATE_TO_DISPLAY_POST) {
+    return Object.assign({}, state, {
+      navigation: { ...state.navigation,  navigateToDisplay: action.payload},
     });
   }
   return state;

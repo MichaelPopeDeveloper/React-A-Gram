@@ -29,11 +29,8 @@ class CreatePost extends Component {
             postPhotoPanelHide: '9999px',
             postShared: false,
             shouldUpdateUser: false,
+            imageFound: '',
         }
-    }
-
-    componentDidMount() {
-        this.handleRetrievedImages();
     }
 
     getSearchedPhotos = (event) => {
@@ -82,6 +79,7 @@ class CreatePost extends Component {
             });
             return this.setState({ finalImageGroups });
         }
+        return this.setState({imageFound: 'No Images Found (Try A Different Keyword)'});
     }
 
     handlePostPhotoToFeed = (event) => {
@@ -117,7 +115,7 @@ class CreatePost extends Component {
 
 
     render() {
-        const { imageSearchText, postDescriptionText, selectedImageUrl, finalImageGroups, selectPhotoPanelHide, postPhotoPanelHide, postShared } = this.state;
+        const { imageSearchText, postDescriptionText, selectedImageUrl, finalImageGroups, selectPhotoPanelHide, postPhotoPanelHide, postShared, imageFound } = this.state;
         if (postShared) return <Redirect to="/newsfeed" />
         return (
             <div>
@@ -135,10 +133,8 @@ class CreatePost extends Component {
                                 <form className="p-4 w-100" onSubmit={this.getSearchedPhotos}>
                                     <input placeholder="Search for a photo..." className="form-control" value={imageSearchText} onChange={this.handleImageSearchText}></input>
                                 </form>
-                                {finalImageGroups.length > 0 ? finalImageGroups.map(image => {
-                                    console.log('image element', image);
-                                    return image;
-                                }) : 'No images were found' /* Fix this to only display error when request to the API has already been made */}
+                                {finalImageGroups.length > 0 ? finalImageGroups.map(image => image)
+                                    : imageFound /* Fix this to only display error when request to the API has already been made */}
                             </div>
                             <div className="d-flex flex-column justify-content-start align-items-center p-5" style={{ overflowX: 'hidden', overflowY: 'scroll', position: 'absolute', width: '100%', height: '100%', left: postPhotoPanelHide }} id="Photo-Search-Wrapper">
                                 <h3>Add back button</h3>

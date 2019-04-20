@@ -35,6 +35,7 @@ class CreatePost extends Component {
 
     componentDidMount() {
         this.setState({ postDescriptionText: this.props.state.postToEdit.description, selectedImageUrl: this.props.state.postToEdit.imageURL });
+        console.log('edit post props', this.props);
     }
 
     getSearchedPhotos = (event) => {
@@ -149,7 +150,6 @@ class CreatePost extends Component {
                     <div className="col d-flex flex-column justify-content-center align-items-center" id="CreatePostWrapper">
                         <div className=" w-75 create-post-panel" style={{ overflow: 'hidden', position: 'relative' }}>
                             <div className="d-flex flex-column justify-content-start align-items-center p-5" style={{ overflowX: 'hidden', overflowY: 'scroll', position: 'absolute', width: '100%', height: '100%', }} id="Photo-Search-Wrapper">
-                                <h3>Add back button</h3>
                                 <h1>Edit Post</h1>
                                 <form className="p-4 w-100" onSubmit={(event) => event.preventDefault()}>
                                     <textarea placeholder="Description..." className="form-control" value={postDescriptionText} onChange={this.handlePostDescriptionText}>Hello</textarea>

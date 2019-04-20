@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, LOGIN_USER, LOGOUT_USER, UPDATE_USER, EDIT_POST } from '../constants/action-types';
+import { ADD_ARTICLE, LOGIN_USER, LOGOUT_USER, UPDATE_USER, EDIT_POST, CLEAR_EDIT_POST, DISPLAY_POST, CLEAR_DISPLAY_POST, NAVIGATE_TO_EDIT_POST, NAVIGATE_TO_DISPLAY_POST } from '../constants/action-types';
 
 export function addArticle(payload) {
   return { type: ADD_ARTICLE, payload }
@@ -21,5 +21,21 @@ export function editPost(payload) {
 };
 
 export function clearEditPost(payload) {
-  return { type: EDIT_POST, payload }
+  return { type: CLEAR_EDIT_POST, payload }
+};
+
+export function displayPost(payload) {
+  return { type: DISPLAY_POST, payload }
+};
+
+export function clearDisplayPost(payload) {
+  return { type: CLEAR_DISPLAY_POST, payload }
+};
+
+export function navigateToEdit(payload) {
+  return { type: NAVIGATE_TO_EDIT_POST, payload }
+};
+
+export function navigateToDisplay(payload) {
+  return { type: NAVIGATE_TO_DISPLAY_POST, payload }
 };
