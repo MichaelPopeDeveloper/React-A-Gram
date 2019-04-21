@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../styles/app.css';
 import Titlebar from '../TitleBar/Titlebar';
-import { updateUser, clearEditPost } from '../../actions/index'
+import { updateUser, clearEditPost, navigateToEdit } from '../../actions/index'
 import * as axios from 'axios';
 
 const mapStateToProps = state => {
@@ -14,6 +14,7 @@ function mapDispatchToProps(dispatch) {
     return {
         updateUser: user => dispatch(updateUser(user)),
         clearEditPost: () => dispatch(clearEditPost()),
+        navigateToEdit: navigate => dispatch(navigateToEdit(navigate)),
     };
 }
 
@@ -94,7 +95,8 @@ class CreatePost extends Component {
                 if (result.status === 200) {
                     console.log(result);
                     const { user } = result.data;
-                    this.props.updateUser(user);
+                    this.props.updateUser(user)
+                    this.props.navigateToEdit(false);
                     this.props.clearEditPost();
                     this.setState({ postShared: true });
                 }
@@ -111,8 +113,9 @@ class CreatePost extends Component {
                     console.log(result);
                     const { user } = result.data;
                     this.props.updateUser(user);
+                    this.props.navigateToEdit(false);
                     this.props.clearEditPost();
-                    this.setState({ postShared: true });
+                    console.log('eggs', this.props.state.postToEdit);
                 }
             })
             .catch(error => console.log(error));
@@ -133,11 +136,13 @@ class CreatePost extends Component {
     }
 
     render() {
-        const { postDescriptionText, selectedImageUrl, postShared } = this.state;
-        if (postShared) return <Redirect to={{
+        const { postDescriptionText, selectedImageUrl, postShared,  } = this.state;
+        const { postToEdit } = this.props.state;
+        if (!postToEdit) return <Redirect to={{
             pathname: "/newsfeed",
             state: { from: this.props.location }
         }} />;
+
         return (
             <div>
                 <Titlebar />

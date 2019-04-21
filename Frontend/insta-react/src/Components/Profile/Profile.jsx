@@ -49,10 +49,10 @@ class Profile extends Component {
         }
       });
 
-      const finalImageGroups = profilePosts.map((imageGroup) => {
+      const finalImageGroups = profilePosts.reverse().map((imageGroup) => {
         return (
           <div className="row">
-            {imageGroup.map(post => {
+            {imageGroup.reverse().map(post => {
               return (
                 <div className="col-lg-4 profile-col-pad" style={{ minHeight: '20rem' }}>
                   <div className="ProfileImageWrapper">

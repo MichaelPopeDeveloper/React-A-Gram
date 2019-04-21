@@ -28,6 +28,7 @@ class CreatePost extends Component {
             selectPhotoPanelHide: '0px',
             postPhotoPanelHide: '9999px',
             postShared: false,
+            postButtonClicked: false,
             shouldUpdateUser: false,
             imageFound: '',
         }
@@ -84,19 +85,21 @@ class CreatePost extends Component {
 
     handlePostPhotoToFeed = (event) => {
         event.preventDefault();
-        const { selectedImageUrl, postDescriptionText } = this.state;
-        axios.post('/user/createPost', { username: this.props.state.user.username, imageURL: selectedImageUrl, postDescriptionText })
-            .then(result => {
-                if (result.status === 200) {
-                    console.log(result);
-                    const { user } = result.data;
-                    this.props.updateUser(user);
-                    console.log('create post user check', this.props);
-                    this.setState({ postShared: true });
-
-                }
-            })
-            .catch(error => console.log(error));
+        if (!this.state.postButtonClicked) {
+            this.setState({postButtonClicked: true});
+            const { selectedImageUrl, postDescriptionText } = this.state;
+            axios.post('/user/createPost', { username: this.props.state.user.username, imageURL: selectedImageUrl, postDescriptionText })
+                .then(result => {
+                    if (result.status === 200) {
+                        console.log(result);
+                        const { user } = result.data;
+                        this.props.updateUser(user);
+                        console.log('create post user check', this.props);
+                        this.setState({ postShared: true });
+                    }
+                })
+                .catch(error => console.log(error));
+        }
     }
 
     handlePostImageClick = (event) => {

@@ -43,7 +43,7 @@ class Post extends Component {
       return (
         <div className="row">
           <div className="col d-flex flex-column justify-content-center align-items-center" id="Post">
-            <div className="post-wrapper d-flex flex-column">
+            <div className="post-wrapper d-flex flex-column mb-3">
               <div className="w-100 d-flex flex-row justify-content-between align-items-center pt-2 mb-2" id="Author-Post-Header">
                 <div className="d-flex justify-content-start align-items-center">
                   <div className="author-post-img-wrapper d-flex justify-content-center align-items-center">
