@@ -5,7 +5,7 @@ import Routes from './Components/Routes';
 class App extends Component {
   render() {
     return (
-      <div className="container-fluid" style={{ padding: '0px' }}>
+      <div className="container-fluid" style={{ padding: '0px', overflow: 'hidden' }}>
         <Routes />
       </div>
     );

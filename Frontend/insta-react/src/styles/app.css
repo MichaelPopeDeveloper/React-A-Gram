@@ -68,6 +68,11 @@
   height: 350px;
   width: 100%;
 }
+.CreatePostImageWrapper {
+  width: 100%;
+  height: 100%;
+  width: 100%;
+}
 
 .profile-col-pad {
   padding: 0.07rem;

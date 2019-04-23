@@ -37,10 +37,10 @@ const Menu = (props) => {
     <div class="uk-offcanvas-bar bg-white p-0">
         {/* <button class="uk-offcanvas-close" type="button" uk-close></button> */}
         <ul className="pl-3 mt-5" id="menu-items">
-          <Link to='/createpost' activeClassName="active" onClick={noNavigation}> <li>Create Post</li> </Link>
-          <Link to='/profile' activeClassName="active" onClick={noNavigation}> <li>Profile</li> </Link>
-          <Link to='/newsfeed' activeClassName="active" onClick={noNavigation}> <li>Newsfeed</li> </Link>
-          <li onClick={logout} uk-toggle="target: #offcanvas-push">Logout</li>
+          <Link to='/createpost' activeClassName="active" onClick={noNavigation} uk-toggle="target: #offcanvas-push"> <li>Create Post</li> </Link>
+          <Link to='/profile' activeClassName="active" onClick={noNavigation} uk-toggle="target: #offcanvas-push"> <li>Profile</li> </Link>
+          <Link to='/newsfeed' activeClassName="active" onClick={noNavigation} uk-toggle="target: #offcanvas-push"> <li>Newsfeed</li> </Link>
+          <li onClick={logout} uk-toggle="target: #offcanvas-push" uk-toggle="target: #offcanvas-push">Logout</li>
         </ul>
     </div>
 </div>
