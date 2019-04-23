@@ -17,6 +17,7 @@ export class Server {
   private port: any = process.env.PORT || 3001;
   public app: express.Application;
   private DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/react-a-gram';
+  private express_session_secret =  process.env.session_secret || 'midoria-shonen';
 
   /**
    * Bootstrap the application.
@@ -83,7 +84,7 @@ export class Server {
 
     this.app.use(
       session({
-        secret: 'midoria-shonen',
+        secret: this.express_session_secret,
         resave: false,
         saveUninitialized: false,
 
