@@ -3,8 +3,10 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../styles/app.css';
 import Titlebar from '../TitleBar/Titlebar';
-import { updateUser, clearEditPost, navigateToEdit } from '../../actions/index'
+import { updateUser, clearEditPost, navigateToEdit } from '../../actions/index';
 import * as axios from 'axios';
+
+const SERVER_BASE_URL = '/apps/reactagram';
 
 const mapStateToProps = state => {
     return { state };
@@ -90,7 +92,7 @@ class CreatePost extends Component {
     handlePostPhotoToFeed = (event) => {
         event.preventDefault();
         const { postDescriptionText, selectedImageUrl } = this.state;
-        axios.post('/user/editPost', { postID: this.props.state.postToEdit._id, postDescriptionText, imageURL: selectedImageUrl })
+        axios.post(SERVER_BASE_URL + '/user/editPost', { postID: this.props.state.postToEdit._id, postDescriptionText, imageURL: selectedImageUrl })
             .then(result => {
                 if (result.status === 200) {
                     console.log(result);
@@ -107,7 +109,7 @@ class CreatePost extends Component {
     handleDeletePost = (event) => {
         event.preventDefault();
         const { postDescriptionText, selectedImageUrl } = this.state;
-        axios.post('/user/deletePost', { postID: this.props.state.postToEdit._id, postDescriptionText, imageURL: selectedImageUrl })
+        axios.post(SERVER_BASE_URL + '/user/deletePost', { postID: this.props.state.postToEdit._id, postDescriptionText, imageURL: selectedImageUrl })
             .then(result => {
                 if (result.status === 200) {
                     console.log(result);

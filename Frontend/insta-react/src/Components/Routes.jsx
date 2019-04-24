@@ -21,6 +21,8 @@ import { logoutUser, navigateToDisplay, navigateToEdit } from '../actions/index'
 import * as axios from 'axios';
 import Menu from './Menu/Menu';
 
+const SERVER_BASE_URL = '/apps/reactagram';
+
 
 
 const mapStateToProps = state => {
@@ -53,8 +55,9 @@ class Routes extends Component {
   }
 
   auth = () => {
-    axios.get('/user')
+    axios.get(SERVER_BASE_URL + '/user')
       .then(result => {
+        console.log('res', result);
         if (result.status === 200) return this.props.login(false);
         return this.setState({ user: result.data.user });
       })

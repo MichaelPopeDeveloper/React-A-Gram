@@ -7,6 +7,8 @@ import * as axios from 'axios';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/index';
 
+const SERVER_BASE_URL = '/apps/reactagram';
+
 const mapStateToProps = state => {
   return { state };
 };
@@ -32,7 +34,7 @@ class PrivateRoute extends Component {
   }
 
   authRender = () => {
-    axios.get('/user')
+    axios.get(SERVER_BASE_URL + '/user')
       .then(result => {
         this.props.login(result.data.user);
        // this.setState({ user: result.data.user, isLoaded: true });

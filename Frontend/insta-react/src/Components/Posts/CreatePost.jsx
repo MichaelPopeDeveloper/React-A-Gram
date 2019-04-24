@@ -6,6 +6,8 @@ import Titlebar from '../TitleBar/Titlebar';
 import { updateUser } from '../../actions/index'
 import * as axios from 'axios';
 
+const SERVER_BASE_URL = '/apps/reactagram';
+
 const mapStateToProps = state => {
     return { state };
 };
@@ -69,23 +71,18 @@ class CreatePost extends Component {
                         {imageGroup.map(image => {
                             return (
                                 <div className="col-xl-4 profile-col-pad d-flex justify-content-center">
-                                    {/* <div className="CreatePostImageWrapper">
+                                    <div className="CreatePostImageWrapper">
                                         <img className="img-fluid hover-pointer" onClick={this.handlePostImageClick} src={image.urls.raw} data={image.urls.raw} />
-                                    </div> */}
-                                    <div className="CreatePostImageWrapper d-flex justify-content-center" style={{height: '500px'}}>
+                                    </div>
+                                    {/* <div className="CreatePostImageWrapper d-flex justify-content-center" style={{height: '500px'}}>
                                         <div className="hover-pointer"
                                             style={{
                                                 background: `url(${image.urls.raw}) no-repeat center center`,
                                                 backgroundSize: 'cover',
                                                 minHeight: '100%',
                                                  minWidth: '25rem',
-                                            }} onClick={() => {
-                                                // this.props.navigateToEdit(false);
-                                                // console.log('post', post);
-                                                // this.props.displayPost(post);
-                                                // this.props.navigateToDisplay(true);
-                                            }} data={image.urls.raw}> </div>
-                                    </div>
+                                            }} onClick={this.handlePostImageClick} data={image.urls.raw}> </div>
+                                    </div> */}
                                 </div>
                             )
                         })}
@@ -102,7 +99,7 @@ class CreatePost extends Component {
         if (!this.state.postButtonClicked) {
             this.setState({ postButtonClicked: true });
             const { selectedImageUrl, postDescriptionText } = this.state;
-            axios.post('/user/createPost', { username: this.props.state.user.username, imageURL: selectedImageUrl, postDescriptionText })
+            axios.post(SERVER_BASE_URL + '/user/createPost', { username: this.props.state.user.username, imageURL: selectedImageUrl, postDescriptionText })
                 .then(result => {
                     if (result.status === 200) {
                         console.log(result);
@@ -145,7 +142,7 @@ class CreatePost extends Component {
                 <div className="row">
                     <div className="col d-flex flex-column justify-content-center align-items-center" id="CreatePostWrapper">
                         <div className=" w-75 create-post-panel" style={{ position: 'relative' }}>
-                            <div className="d-flex flex-column justify-content-start align-items-center p-5" style={{ overflowX: 'hidden', /*overflowY: 'scroll',*/ position: 'relative', width: '100%', height: '100%', left: selectPhotoPanelHide }} id="Photo-Search-Wrapper">
+                            <div className="d-flex flex-column justify-content-start align-items-center p-5" style={{ overflowX: 'hidden', /*overflowY: 'scroll',*/ position: 'absolute', width: '100%', height: '100%', left: selectPhotoPanelHide }} id="Photo-Search-Wrapper">
                                 <h1>Select a Photo to Post</h1>
                                 <form className="p-4 w-100" onSubmit={this.getSearchedPhotos}>
                                     <input placeholder="Search for a photo..." className="form-control" value={imageSearchText} onChange={this.handleImageSearchText}></input>

@@ -10,6 +10,8 @@ import { loginUser } from '../../actions/index';
 import Titlebar from '../TitleBar/Titlebar';
 import { withRouter } from 'react-dom';
 
+const SERVER_BASE_URL = '/apps/reactagram';
+
 const mapStateToProps = state => {
   // return { articles: state.articles };
   return { state };
@@ -39,7 +41,7 @@ class Login extends Component {
 
   login() {
     const { username, password } = this.state;
-    axios.post('/user/login', {
+    axios.post(SERVER_BASE_URL + '/user/login', {
       username,
       password,
     })

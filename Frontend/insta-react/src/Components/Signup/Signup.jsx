@@ -9,6 +9,8 @@ import Titlebar from '../TitleBar/Titlebar';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/index';
 
+const SERVER_BASE_URL = '/apps/reactagram';
+
 const mapStateToProps = state => {
   // return { articles: state.articles };
   return { state };
@@ -38,13 +40,13 @@ class Signup extends Component {
 
   login() {
     const { username, email, password } = this.state;
-    axios.post('/user/signup', {
+    axios.post(SERVER_BASE_URL + '/user/signup', {
       username,
       email,
       password,
     })
       .then((res) => {
-        console.log(res);
+        console.log('signup res', res);
         this.props.loginUser(res.data.user);
       })
       .catch(err => console.log(err));

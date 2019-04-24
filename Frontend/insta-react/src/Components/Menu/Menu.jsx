@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { logoutUser, navigateToEdit, navigateToDisplay } from '../../actions/index';
 import * as axios from 'axios';
 
+const SERVER_BASE_URL = '/apps/reactagram';
+
 const mapStateToProps = state => {
   return { state };
 };
@@ -22,7 +24,7 @@ const Menu = (props) => {
   const logout = () => {
     noNavigation();
     props.logout(false); // sets user to false in redux state
-    axios.get('/user/logout')
+    axios.get(SERVER_BASE_URL + '/user/logout')
     .then(result => console.log(result))
     .catch(error => console.log(error));
   }
