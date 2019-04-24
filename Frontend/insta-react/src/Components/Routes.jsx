@@ -69,7 +69,7 @@ class Routes extends Component {
       <Router>
         <Menu />
         <Route path="/login" component={Login} />
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={Login} />
         <Route path="/signup" component={Signup} />
         <PrivateRoute path="/createpost" component={CreatePost} />
         <PrivateRoute path="/post" component={PostDisplay} />
