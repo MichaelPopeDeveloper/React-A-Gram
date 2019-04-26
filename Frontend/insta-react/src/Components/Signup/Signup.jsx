@@ -30,12 +30,17 @@ class Signup extends Component {
       email: '',
       password: '',
       authenticated: false,
+      loginError: false,
     };
     this.login = this.login.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePaswordChange = this.handlePaswordChange.bind(this);
+  }
+
+  componentWillMount() {
+    this.setState({loginError: ''});
   }
 
   login() {
@@ -47,6 +52,7 @@ class Signup extends Component {
     })
       .then((res) => {
         console.log('signup res', res);
+        if (res.data.loginError) return this.setState({loginError: res.data.loginError});
         this.props.loginUser(res.data.user);
       })
       .catch(err => console.log(err));
@@ -85,6 +91,7 @@ class Signup extends Component {
         <Titlebar />
         <div className="row">
           <div className="col d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+          <h1>{this.state.loginError}</h1>
             <div style={{ marginTop: '10vh' }}></div>
 
             <h1 className="p-4">Signup</h1>

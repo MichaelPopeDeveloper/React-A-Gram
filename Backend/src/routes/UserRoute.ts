@@ -35,7 +35,7 @@ export const userRoute = router
         console.log('assign user', user);
         res.send({ user });
       } else {
-        res.sendStatus(401);
+        res.sendStatus(401).send({ loginError: 'Username or Password was Incorrect' });
       }
     })
   .post('/signup', (req, res, next) => {
@@ -52,7 +52,7 @@ export const userRoute = router
             })
             .catch(err => console.log(err));
         } else {
-          res.send('Username already exists');
+          res.send({ loginError: 'Username Already Exists (Try Another One or Sign In)' });
         }
       });
   },
