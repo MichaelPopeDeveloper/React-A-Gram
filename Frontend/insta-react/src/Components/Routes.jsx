@@ -21,7 +21,7 @@ import { logoutUser, navigateToDisplay, navigateToEdit } from '../actions/index'
 import * as axios from 'axios';
 import Menu from './Menu/Menu';
 
-const SERVER_BASE_URL = '/apps/reactagram';
+const SERVER_BASE_URL = '';
 
 
 

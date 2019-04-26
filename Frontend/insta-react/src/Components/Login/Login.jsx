@@ -10,7 +10,7 @@ import { loginUser } from '../../actions/index';
 import Titlebar from '../TitleBar/Titlebar';
 import { withRouter } from 'react-dom';
 
-const SERVER_BASE_URL = '/apps/reactagram';
+const SERVER_BASE_URL = '';
 
 const mapStateToProps = state => {
   // return { articles: state.articles };

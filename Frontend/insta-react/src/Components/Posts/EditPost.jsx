@@ -6,7 +6,7 @@ import Titlebar from '../TitleBar/Titlebar';
 import { updateUser, clearEditPost, navigateToEdit } from '../../actions/index';
 import * as axios from 'axios';
 
-const SERVER_BASE_URL = '/apps/reactagram';
+const SERVER_BASE_URL = '';
 
 const mapStateToProps = state => {
     return { state };

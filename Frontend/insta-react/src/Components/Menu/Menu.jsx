@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { logoutUser, navigateToEdit, navigateToDisplay } from '../../actions/index';
 import * as axios from 'axios';
 
-const SERVER_BASE_URL = '/apps/reactagram';
+const SERVER_BASE_URL = '';
 
 const mapStateToProps = state => {
   return { state };

@@ -9,7 +9,7 @@ import Titlebar from '../TitleBar/Titlebar';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/index';
 
-const SERVER_BASE_URL = '/apps/reactagram';
+const SERVER_BASE_URL = '';
 
 const mapStateToProps = state => {
   // return { articles: state.articles };
