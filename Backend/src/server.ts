@@ -134,7 +134,7 @@ export class Server {
   private routes() {
     // use router middleware
     this.app.use(express.static(path.join(__dirname, '../public/build')));
-    this.app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../public/build', 'index.html')));
+    // this.app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../public/build', 'index.html')));
     this.app.use('/user', userRoute);
   }
 

@@ -49,7 +49,6 @@ var Server = (function () {
     };
     Server.prototype.routes = function () {
         this.app.use(express.static(path.join(__dirname, '../public/build')));
-        this.app.get('*', function (req, res) { return res.sendFile(path.join(__dirname, '../public/build', 'index.html')); });
         this.app.use('/user', UserRoute_1.userRoute);
     };
     return Server;

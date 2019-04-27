@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Redirect,
+  Link
 } from "react-router-dom";
 import '../../styles/app.css';
 import { editPost, navigateToEdit } from '../../actions/index';
@@ -25,6 +26,14 @@ const EditDropdownProto = ({ post, ...props }) => {
   return <a className="dropdown-item" onClick={setPostToState} href="#">Edit</a>;
 }
 
+const createFirstPost = () => {
+  return (
+    <div className="w-100 d-flex flex-column justify-content-center align-items-center" style={{minHeight: '70vh'}}>
+    <h1 className="text-center">Create First Post</h1>
+    <Link to='/createpost'><button className="btn btn-large btn-primary">Create Post</button></Link>
+    </div>
+  );
+}
 const EditDropdown = connect(mapStateToProps, mapDispatchToProps)(EditDropdownProto);
 
 class Post extends Component {
@@ -34,6 +43,8 @@ class Post extends Component {
       editPost: false,
     }
   }
+
+  
 
 
   mapNewsfeedPosts = () => {
@@ -85,7 +96,10 @@ class Post extends Component {
     return (
       // fix image not covering entire backgrond on right side on large screens
       <div>
-        {this.mapNewsfeedPosts()}
+        {(this.props.state.user.posts.length > 0) ?
+          this.mapNewsfeedPosts()
+          : createFirstPost()
+        }
       </div>
     );
   }

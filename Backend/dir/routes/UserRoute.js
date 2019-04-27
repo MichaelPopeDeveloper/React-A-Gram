@@ -22,8 +22,14 @@ exports.userRoute = router
     }
 })
     .post('/login', function (req, res, next) {
+    var username = req.body.username;
     console.log('req.body', req.body);
-    next();
+    User_1.User.findOne({ username: username })
+        .then(function (user) {
+        if (user)
+            return next();
+        return res.send({ loginError: 'Username or Email Already Exists (Try Another One or Sign In)' });
+    });
 }, passport.authenticate('local'), function (req, res) {
     console.log('req.user', req.user);
     if (req.user) {
@@ -31,11 +37,11 @@ exports.userRoute = router
         delete user.password;
         delete user._id;
         console.log('assign user', user);
-        res.send({ user: user });
+        console.log('did login');
+        return res.send({ user: user });
     }
-    else {
-        res.sendStatus(401);
-    }
+    console.log('did not login');
+    return res.send({ loginError: 'Username or Password was Incorrect' });
 })
     .post('/signup', function (req, res, next) {
     var _a = req.body, username = _a.username, email = _a.email, password = _a.password;
@@ -44,14 +50,14 @@ exports.userRoute = router
         .then(function (user) {
         if (!user) {
             var newUser = new User_1.User({ username: username, email: email, password: Encryptor.encryptString(password) });
-            newUser.save()
+            return newUser.save()
                 .then(function (result) {
                 console.log('saved user result', result);
                 next();
             })["catch"](function (err) { return console.log(err); });
         }
         else {
-            res.send('Username already exists');
+            res.send({ loginError: 'Username or Email Already Exists (Try Another One or Sign In)' });
         }
     });
 }, passport.authenticate('local'), function (req, res) {
@@ -61,10 +67,7 @@ exports.userRoute = router
         delete user.password;
         delete user._id;
         console.log('assign user', user);
-        res.send({ user: user });
-    }
-    else {
-        res.sendStatus(401);
+        return res.send({ user: user });
     }
 })
     .get('/logout', function (req, res, next) {

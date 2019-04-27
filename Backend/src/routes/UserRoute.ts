@@ -22,9 +22,15 @@ export const userRoute = router
     }
   })
   .post('/login', (req, res, next) => {
+    const { username } = req.body;
     console.log('req.body', req.body);
-    next()
+    User.findOne({ username })
+      .then((user) => {
+        if (user) return next();
+        return res.send({ loginError: 'Username or Email Already Exists (Try Another One or Sign In)' });
+      });
   },
+
     passport.authenticate('local'),
     (req, res) => {
       console.log('req.user', req.user);
@@ -33,10 +39,11 @@ export const userRoute = router
         delete user.password;
         delete user._id;
         console.log('assign user', user);
-        res.send({ user });
-      } else {
-        res.sendStatus(401).send({ loginError: 'Username or Password was Incorrect' });
+        console.log('did login');
+        return res.send({ user });
       }
+      console.log('did not login');
+      return res.send({ loginError: 'Username or Password was Incorrect' });
     })
   .post('/signup', (req, res, next) => {
     const { username, email, password } = req.body;
@@ -45,14 +52,14 @@ export const userRoute = router
       .then((user) => {
         if (!user) {
           const newUser = new User({ username, email, password: Encryptor.encryptString(password) });
-          newUser.save()
+          return newUser.save()
             .then(result => {
               console.log('saved user result', result);
               next()
             })
             .catch(err => console.log(err));
         } else {
-          res.send({ loginError: 'Username Already Exists (Try Another One or Sign In)' });
+          res.send({ loginError: 'Username or Email Already Exists (Try Another One or Sign In)' });
         }
       });
   },
@@ -64,9 +71,7 @@ export const userRoute = router
         delete user.password;
         delete user._id;
         console.log('assign user', user);
-        res.send({ user });
-      } else {
-        res.sendStatus(401);
+        return res.send({ user });
       }
     })
   .get('/logout', (req, res, next) => {
@@ -190,7 +195,7 @@ export const userRoute = router
                     delete (user as any).password; // clean user
                     delete (user as any)._id;
                     res.status(200).send({ user });
-                  } 
+                  }
                 })
                 .catch(error => {
                   res.send(error);

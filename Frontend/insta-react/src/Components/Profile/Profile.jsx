@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Redirect
+  Redirect,
+  Link,
 } from 'react-router-dom';
 import '../../styles/app.css';
 import Post from '../Posts/Post';
@@ -18,6 +19,15 @@ function mapDispatchToProps(dispatch) {
     navigateToEdit: navigate => dispatch(navigateToEdit(navigate)),
     navigateToDisplay: navigate => dispatch(navigateToDisplay(navigate)),
   };
+}
+
+const createFirstPost = () => {
+  return (
+    <div className="w-100 d-flex flex-column justify-content-center align-items-center" style={{minHeight: '70vh'}}>
+    <h1 className="text-center">Create First Post</h1>
+    <Link to='/createpost'><button className="btn btn-large btn-primary">Create Post</button></Link>
+    </div>
+  );
 }
 
 class Profile extends Component {
@@ -79,6 +89,8 @@ class Profile extends Component {
     }
   }
 
+  
+
   render() {
     const { navigateToDisplay } = this.props.state.navigation;
     if (navigateToDisplay) {
@@ -102,7 +114,10 @@ class Profile extends Component {
 
         <div style={{ marginTop: '10vh' }}>
         </div>
-        {this.mapProfilePosts()}
+        { (this.props.state.user.posts.length > 0) ?
+          this.mapProfilePosts()
+          : createFirstPost()
+        }
       </div>
     );
   }

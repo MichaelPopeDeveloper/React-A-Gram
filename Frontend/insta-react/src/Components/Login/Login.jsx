@@ -30,7 +30,7 @@ class Login extends Component {
       username: '',
       email: '',
       password: '',
-      errorMessage: ''
+      loginError: ''
     };
     this.login = this.login.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,6 +47,7 @@ class Login extends Component {
     })
       .then((res) => {
         console.log(res);
+        if (res.data.loginError) return this.setState({loginError: res.data.loginError});
         this.props.loginUser(res.data.user);
       })
       .catch(err => console.log(err));
@@ -88,12 +89,13 @@ class Login extends Component {
           <div className="col d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
             <div style={{ marginTop: '10vh' }}></div>
 
-            <h1 className="p-4 pb-0 mb-0">Login</h1>
+            <h1 className="p-4 pt-1 pb-0 mb-0">Login</h1>
             {/* Programatically display error message here */}
             <h3 className="p-0 m-0 mb-3 text-secondary">{this.state.errorMessage}</h3>
 
             <form className="shadow p-5" onSubmit={this.handleSubmit}>
               {/* Add link to signup component */}
+          <p className="text-center">{this.state.loginError}</p>
               <p>Not a member? <Link to="/signup"><span className="text-secondary">Sign Up</span></Link></p>
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>

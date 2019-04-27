@@ -40,7 +40,7 @@ class Signup extends Component {
   }
 
   componentWillMount() {
-    this.setState({loginError: ''});
+    this.setState({ loginError: '' });
   }
 
   login() {
@@ -52,7 +52,7 @@ class Signup extends Component {
     })
       .then((res) => {
         console.log('signup res', res);
-        if (res.data.loginError) return this.setState({loginError: res.data.loginError});
+        if (res.data.loginError) return this.setState({ loginError: res.data.loginError });
         this.props.loginUser(res.data.user);
       })
       .catch(err => console.log(err));
@@ -91,13 +91,13 @@ class Signup extends Component {
         <Titlebar />
         <div className="row">
           <div className="col d-flex flex-column justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-          <h1>{this.state.loginError}</h1>
             <div style={{ marginTop: '10vh' }}></div>
 
             <h1 className="p-4">Signup</h1>
 
             <form className="shadow p-5" onSubmit={this.handleSubmit}>
-            <p>Already a Member? <Link to="/login"><span className="text-secondary">Login</span></Link></p>
+              <p>{this.state.loginError}</p>
+              <p>Already a Member? <Link to="/login"><span className="text-secondary">Login</span></Link></p>
               <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input value={username} onChange={this.handleUsernameChange} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username" />
